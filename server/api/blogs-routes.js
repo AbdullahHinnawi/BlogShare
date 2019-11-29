@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 
-
 const path = require('path');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 
 const multer = require('multer');
 //const upload = multer({dest: './public/images'});
+var moment = require('moment');
 
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
@@ -16,18 +16,50 @@ const methodOverride = require('method-override');
 
 router.use(methodOverride('_method'));
 
-const url = 'mongodb://localhost:27017/blogi';
+const url = 'mongodb://localhost:27017/bloggeri';
 const options = { native_parser: true,useUnifiedTopology: true, useNewUrlParser: true };
-const db = require('monk')(url, options );
-const conn = mongoose.createConnection(url,options);
+mongoose.connect(url,options);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+//const db = require('monk')(url, options );
+//const conn = mongoose.createConnection(url,options);
 
 let gfs;
-conn.once('open',  () => {
+db.once('open',  () => {
   // init stream
-   gfs = Grid(conn.db, mongoose.mongo);
+   gfs = Grid(db.db, mongoose.mongo);
    gfs.collection('uploads');
 
 });
+/*
+conn.once('open',  () => {
+  // init stream
+  gfs = Grid(conn.db, mongoose.mongo);
+  gfs.collection('uploads');
+
+});
+*/
+
+// define Schema
+const BlogSchema = mongoose.Schema({
+  title: String,
+  body: String,
+  category: String,
+  date: String,
+  author: String,
+  imageFile: String
+});
+
+// compile schema to model
+var Blog = mongoose.model('Blog', BlogSchema, 'blogs');
+
+// Define categories Schema
+const CategorySchema = mongoose.Schema({
+  name: String
+});
+// compile schema to model
+var Categories = mongoose.model('Categories', CategorySchema, 'categories');
+
 
 // create storage engine
 const storage = new GridFsStorage({
@@ -50,42 +82,49 @@ const storage = new GridFsStorage({
 });
 const upload = multer({ storage });
 
+// Get all blogs
 router.get('/api/blog', (req,res) =>{
-
-  gfs.files.find().toArray((err, files) =>{
-    // ckeck if files
-    if(!files || files.length === 0){
-      return res.status(404).json({
-        err:'no files exist'
-      });
-    }else{
-      // Files exist
-      return res.json(files);
-    }
-
+  Blog.find(function(err, blogs){
+    if(err) return console.log(err);
+    return res.status(200).json({blogs: blogs})
   });
-
-  /*
-  var blogs = db.get('blogs');
-  blogs.find({}, function(error, blogs){
-    if(error){
-      return res.status(500).json()
-    }else{
-      return res.status(200).json({blogs: blogs})
-      // return res.status(200).json(blogs);
-    }
-  });
-*/
-
 });
 
+// Get all categories
+router.get('/api/categories', (req,res) =>{
+  Categories.find(function(err, categories){
+    if(err) return console.log(err);
+    return res.status(200).json({categories: categories})
+  });
+});
 
 
 router.post('/api/blog',upload.single('imageFile'), (req,res) =>{
  // res.json({file: req.file});
  // res.redirect('http://localhost:8080/');
+  console.log('req.file####');
   console.log(req.file);
+  console.log('req.body####');
   console.log(req.body);
+
+
+  // a document istance
+  let blog1 = new Blog({
+    title: req.body.title,
+    body : req.body.body,
+    category : req.body.category,
+    date : moment(new Date()).format('LLLL'),
+    author : req.body.author,
+    imageFile: req.file.filename
+  });
+
+  blog1.save(function(err,blog){
+    if(err) return console.log(err);
+    console.log(blog.title + " saved to blogs collection");
+  });
+  res.send(blog1);
+
+
 
 });
 // route to /api/files
@@ -137,80 +176,8 @@ router.get('/api/image/:filename', (req,res) =>{
         err: 'Not an image'
       });
     }
-
   });
 });
-
-
-
-/*
-router.post('/api/blog', upload.single('imageFile'), function(req,res,next) {
-  //res.setHeader('Content-Type', 'application/json');
-
-  console.log('req.body: ########');
-  console.log(req.body);
- // res.send(req.body);
-
-  console.log('req.file#######');
-  console.log(req.file);
-  res.send(req.file.filename);
-
-
-
-
-
-
-      // get form values
-      let title = req.body.title;
-      let body = req.body.body;
-      let category = req.body.category;
-      let date = new Date();
-      let author = req.body.author;
-      let image = null;
-
-
-      // check image upload
-       if(req.file){
-         image = req.file.filename;
-         console.log('file name === image: """"""""""""""');
-
-         console.log(image);
-
-       }else{
-           image = 'noimage.jpg';
-       }
-
-
-      let blogs = db.get('blogs');
-      blogs.insert({
-        "title":title,
-        "body": body,
-        "category": category,
-        "date": date,
-        "author": author,
-        "image": image,
-      }, function(err){
-        if(err){
-          res.send(err);
-        }else{
-
-
-         // req.flash('success', 'Blog Created!');
-         // req.location('/');
-
-         // res.end(JSON.stringify(req.body, null, 2));
-
-        }
-      });
-
-
-});
-*/
-
-
-
-
-
 
 /*
 router.get('/api/blog/:id', function(req,res) {

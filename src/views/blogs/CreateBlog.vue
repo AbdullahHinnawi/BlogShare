@@ -11,20 +11,25 @@
 
         <div class="form-group">
         <label for="category">Category</label>
-        <select v-model="blog.category" id="category" name="category">
-            <option> Technology</option>
-            <option> Business</option>
+        <select  @change="getCategoryValue"  id="category" name="category" ref="category">
+            <option v-for=" category in categories"
+                    v-bind:key="category._id"
+                    v-bind:title="category.name"
+                    v-bind:value="category.name"
+            >
+                {{ category.name }}
+            </option>
         </select>
         </div>
 
         <div class="form-group">
         <label for="body">Body</label>
-        <vue-editor v-model="blog.body" type="text" id="body" name="body" placeholder="What is in your mind?"></vue-editor>
+        <vue-editor v-model="textEditorContent" type="text" id="body" name="body" placeholder="What is in your mind?"></vue-editor>
         </div>
 
         <div class="form-group">
         <label for="image">Image</label>
-        <input type="file" id="image" name="imageFile" accept="*/*" @change="getImage" ref="imageFile">
+        <input type="file" id="image" name="imageFile" accept="image/*" @change="getImage" ref="imageFile">
         </div>
 
         <div class="form-group">
@@ -48,12 +53,7 @@
   // Basic Use - Covers most scenarios
   import { VueEditor } from "vue2-editor";
   import axios from 'axios';
-  /*
-  const express = require('express');
-  const cors = require('cors');
-  const app = express();
-  app.use(cors());
-    */
+
 
   export default {
     name: 'CreateBlog',
@@ -65,24 +65,34 @@
         blog:{
           title: '',
           body:'',
-          category: '',
+          category: 'Technology',
           date:'',
           author:'',
           image:''
-
         },
-       // message:"",
-       // error: false
+        categories:[],
+        textEditorContent: ''
       };
+    },
+    async beforeRouteEnter(to, from, next){
+      try{
+        const res =  await axios.get('http://localhost:3000/api/categories');
+        //const data =  res.data;
+        window.console.log('data');
+        window.console.log(res.data);
+
+        next(vm => {vm.categories = res.data.categories});
+      }catch(err){
+        window.console.log(err);
+      }
+
     },
     methods:{
       getImage(event){
         this.blog.image= event.target.files[0];
 
         //this.blog.image = this.$refs.file.files[0];
-       // this.error= false;
 
-        //this.blog.image= this.$refs.image.files[0];
         /*
         const img = event.target.files[0];
         let base64value;
@@ -93,7 +103,6 @@
            base64value = e.target.result;
           window.console.log('€%&€&%#%#€%');
           window.console.log(base64value);
-
         };
         fileReader.readAsDataURL(img);
         this.blog.image = base64value;
@@ -101,13 +110,9 @@
         */
         window.console.log('image');
         window.console.log(this.blog.image);
-
-
-
-
-
       },
       onSubmit: async function(){
+        this.blog.body = this.textEditorContent.replace(/<[^>]+>/g, '');
         var formData = new FormData();
         formData.append('title', this.blog.title);
         formData.append('body', this.blog.body);
@@ -133,8 +138,14 @@
 
          });
 
-
+        this.$router.push({name: 'all-blogs'});
+      },
+      getCategoryValue(){
+        this.blog.category = this.$refs.category.value;
+        window.console.log('this.$refs');
+        window.console.log(this.$refs.category.value);
       }
+
     }
   };
 

@@ -24,6 +24,7 @@
     "i": "^0.3.6",
     "jquery": "^3.4.1",
     "method-override": "^3.0.0",
+    "moment": "^2.24.0",
     "mongodb": "2.2.21",
     "mongoose": "^5.7.12",
     "monk": "https://github.com/vccabral/monk.git",

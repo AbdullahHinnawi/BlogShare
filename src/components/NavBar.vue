@@ -2,7 +2,7 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top custom-bg-dark">
         <router-link to="/" class="navbar-brand">
-            <img src="../assets/logo.png" style="max-height: 25px;"/>Bloggeri
+            <img src="../assets/logo.png" style="max-height: 25px;"/>Blogi
         </router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

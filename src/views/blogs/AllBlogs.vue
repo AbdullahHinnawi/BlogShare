@@ -7,15 +7,11 @@
         <div v-if="blogs && blogs.length > 0" class="d-flex flex-wrap justify-content-start">
             <div v-for="blog in blogs" v-bind:key="blog._id" class="card mb-2 ml-2" style="width: 50rem;">
 
-               <!-- <h2>{{blog.title}}</h2>s
-                <p> Posted in {{blog.category}} by {{blog.author}} on {{blog.date}} </p>  -->
-                <img id="img"  :src="'http://localhost:3000/api/image/' + blog.filename"  alt="image"/>
-               <!-- <p>{{blog.body}}</p> -->
-
-                <!--   :src="require(`@/assets/img/${imgURL}`)"  -->
-                <!-- v-bind:src="'/public/images' + blog.image"  v-bind:src="blog.image"-->
-
-
+                <h2>{{blog.title}}</h2>
+                <p> Posted in <b><a href="/category">{{blog.category}}</a></b> by {{blog.author}} on {{blog.date}} </p>
+                <img id="img" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
+                <p>{{blog.body}}</p>
+                <!-- src="../../assets/logo.png"    -->
             </div>
         </div>
 
@@ -45,9 +41,10 @@
           window.console.log(err);
         }
 
-        //this.receivedImage= this.blogs[0].image;
     }
+
   };
+
 </script>
 
 <style scoped>
