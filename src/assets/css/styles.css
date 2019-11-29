@@ -1,0 +1,69 @@
+/*  star selector styles every thing */
+* {
+    color: black;
+}
+.custom-bg-dark {
+    /* to overide bootstrap use important*/
+    background-color: #001943 !important;
+}
+.custom-hello-world{
+    /* to overide bootstrap use important*/
+    background-color: #428BCA !important;
+    color: black !important;
+}
+
+nav.navbar{
+    height: 4rem;
+}
+a.navbar-brand{
+    /*text-transform: uppercase;
+    letter-spacing: 1px;*/
+}
+li.nav-item a {
+    text-transform: uppercase;
+}
+@media screen and (max-width: 767px) {
+    div#navbarCollapse{
+        background-color: #001943 !important;
+      /*  background-color: #FFD100 !important;*/
+        width: 100%;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        padding-left: 20px;
+        padding-bottom: 5px;
+    }
+
+}
+div#app-container{
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 50px;
+    width: 100%;
+    padding: 2rem;
+   /* background-color: #4A4B4C;*/
+    overflow: auto; /*for scrolling*/
+
+
+}
+footer#custom-footer{
+    height: 6rem;
+    background-color: #373f46;
+    font-size: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div#custom-home{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
