@@ -12,6 +12,9 @@
                 <img id="img" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
                 <p>{{blog.body}}</p>
                 <!-- src="../../assets/logo.png"    -->
+                <div>
+                    <router-link :to="{name: 'show-blog', params:{id: blog._id}}" class="btn btn-success m-3"  exact >Read More...</router-link>
+                </div>
             </div>
         </div>
 
@@ -20,6 +23,7 @@
 
 <script>
     import axios from 'axios';
+    import * as auth from '../../authService';
   export default {
     name: 'AllBlogs',
     data: function(){
@@ -31,12 +35,24 @@
     },
     async beforeRouteEnter(to, from, next){
           try{
-          const res =  await axios.get('http://localhost:3000/api/blog');
+          const res =  await axios.get('http://localhost:3000/api/blogs',{
+            headers:{
+              Authorization: auth.getToken(),
+            }
+          });
           //const data =  res.data;
           window.console.log('data');
           window.console.log(res.data);
+          // save received blogs to an array
+          const array = res.data.blogs;
+          window.console.log('array');
+          window.console.log(array);
+          // make a reversed array
+          const reversedArray = array.reverse();
+            window.console.log('reversedArray');
+            window.console.log(reversedArray);
 
-          next(vm => {vm.blogs = res.data.blogs});
+          next(vm => {vm.blogs = reversedArray});
         }catch(err){
           window.console.log(err);
         }
@@ -47,6 +63,11 @@
 
 </script>
 
+
 <style scoped>
+
+    img{
+        width: 100%;
+    }
 
 </style>

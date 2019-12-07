@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 
 
-class DataBase{
-
-  static connectToDB(){
-      const url = 'mongodb://localhost:27017/blogi';
-      const options = {useNewUrlParser: true};
-      mongoose.connect(url, options).then(console.log('Connected to Mongodb!')).catch(error =>
-          console.log('Unable to connect to Mongodb: error: ' + error));
+export  function connectToDB(){
+  const url = 'mongodb://localhost:27017/bloggeri';
+  const options = { native_parser: true,useUnifiedTopology: true, useNewUrlParser: true };
+      mongoose.connect(url, options, error => {
+        if(error){
+          console.log('Unable to connect to database');
+          throw error;
+        } else{
+          console.log('connected to MongoDB!');
+        }
+      });
   }
 
 
-}
-export default DataBase;
+

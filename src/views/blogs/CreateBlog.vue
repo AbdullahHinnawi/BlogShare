@@ -17,9 +17,10 @@
                     v-bind:title="category.name"
                     v-bind:value="category.name"
             >
-                {{ category.name }}
+                {{ category.name.toUpperCase()}}
             </option>
         </select>
+
         </div>
 
         <div class="form-group">
@@ -32,6 +33,7 @@
         <input type="file" id="image" name="imageFile" accept="image/*" @change="getImage" ref="imageFile">
         </div>
 
+        <!--
         <div class="form-group">
         <label for="author">Author</label>
         <select v-model="blog.author" type="text" id="author" name="author">
@@ -39,6 +41,7 @@
             <option>John</option>
         </select>
         </div>
+        -->
 
         <div class="form-group">
         <button type="submit" name="submit" class="btn btn-secondary">Create</button>
@@ -53,6 +56,7 @@
   // Basic Use - Covers most scenarios
   import { VueEditor } from "vue2-editor";
   import axios from 'axios';
+  import * as auth from '../../authService';
 
 
   export default {
@@ -67,7 +71,7 @@
           body:'',
           category: 'Technology',
           date:'',
-          author:'',
+         // author:'',
           image:''
         },
         categories:[],
@@ -75,11 +79,18 @@
       };
     },
     async beforeRouteEnter(to, from, next){
+
       try{
-        const res =  await axios.get('http://localhost:3000/api/categories');
+        const res =  await axios.get('http://localhost:3000/api/categories', {
+          headers: {
+            Authentication: auth.getToken(),
+          }
+        });
         //const data =  res.data;
         window.console.log('data');
         window.console.log(res.data);
+        //const categories = res.data.categories;
+      //  const categoriesToUpperCase = categories.toUpperCase();
 
         next(vm => {vm.categories = res.data.categories});
       }catch(err){
@@ -91,7 +102,7 @@
       getImage(event){
         this.blog.image= event.target.files[0];
 
-        //this.blog.image = this.$refs.file.files[0];
+       // this.blog.image = this.$refs.file.files[0];
 
         /*
         const img = event.target.files[0];
@@ -118,15 +129,16 @@
         formData.append('body', this.blog.body);
         formData.append('category', this.blog.category);
         formData.append('date', this.blog.date);
-        formData.append('author', this.blog.author);
+        formData.append('author', auth.getUsername());
         formData.append('imageFile', this.blog.image);
         window.console.log('THIS:BLOG______');
         window.console.log(formData);
 
-         await axios.post('http://localhost:3000/api/blog',formData,{
 
+         await axios.post('http://localhost:3000/api/blogs',formData,{
            headers: {
-             'Content-Type': 'multipart/form-data'
+             'Content-Type': 'multipart/form-data',
+              Authentication: auth.getToken(),
            }
          }).then(function(res){
            window.console.log('res.data');

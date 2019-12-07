@@ -1,5 +1,7 @@
 import {StringUtil} from '../string-util';
 import express from 'express';
+import User from './user-model';
+import {generateJWT} from '../auth-service';
 const router = express.Router();
 
 router.post('/api/auth',function(req,res){
@@ -7,7 +9,23 @@ router.post('/api/auth',function(req,res){
   if(!validation.isValid){
     return res.status(400).json({message: validation.message});
   }
-  return res.status(204).json();
+  //req.body.username.toLowerCase
+  User.findOne({username: req.body.username},
+      (error, user) =>{
+          if (error){
+            return res.status(500).json();
+          }
+          if(!user){
+            return res.status(401).json();
+          }
+          const passwordsMatch = User.passwordMatches(req.body.password, user.password);
+          if(!passwordsMatch){
+            return res.status(401).json();
+          }
+          const token = generateJWT(user);
+          return res.status(200).json({token: token});
+
+      });
 
 } );
 
@@ -26,4 +44,5 @@ function validate(body){
     message: errors
   }
 }
-module.exports= router;
+//module.exports= router;
+export default router;

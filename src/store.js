@@ -1,20 +1,23 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import * as auth from './authService';
+//import {isLoggedIn} from './authService';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     isLoggedIn:false,
-    apiUrl: 'http://localhost:3000',
+    apiUrl: 'http://localhost:3000/api',
     username: null,
     userId: null
   },
   mutations: {
     authenticate(state){
       state.isLoggedIn = auth.isLoggedIn();
+      window.console.log('the store isLoggedIN: ' + state.isLoggedIn);
       if(state.isLoggedIn){
+        window.console.log('STORE 2  isLoggedIN: ' + state.isLoggedIn);
         state.username = auth.getUsername();
         state.userId = auth.getUserId();
       }else{
@@ -24,6 +27,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    authenticate(context){
+      context.commit('authenticate');
+    }
   },
   modules: {
   }

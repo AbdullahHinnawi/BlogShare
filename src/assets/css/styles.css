@@ -4,11 +4,13 @@
 }
 .custom-bg-dark {
     /* to overide bootstrap use important*/
-    background-color: #001943 !important;
+   /* background-color: #001943 !important;*/
+    background-color: #0d47a1 !important;
+
 }
 .custom-hello-world{
     /* to overide bootstrap use important*/
-    background-color: #428BCA !important;
+    background-color: #ffbb33 !important;
     color: black !important;
 }
 
@@ -22,9 +24,13 @@ a.navbar-brand{
 li.nav-item a {
     text-transform: uppercase;
 }
+#nav-username {
+    text-transform: none;
+}
 @media screen and (max-width: 767px) {
     div#navbarCollapse{
-        background-color: #001943 !important;
+        /* background-color: #001943 !important;*/
+        background-color: #0d47a1 !important;
       /*  background-color: #FFD100 !important;*/
         width: 100%;
         position: fixed;
@@ -50,6 +56,7 @@ div#app-container{
 footer#custom-footer{
     height: 6rem;
     background-color: #373f46;
+
     font-size: 1rem;
     position: fixed;
     bottom: 0;

@@ -9,6 +9,23 @@ import 'bootstrap'
 import './assets/css/styles.css'
 import BootstrapVue from 'bootstrap-vue';
 
+import FlashMessage from '@smartweb/vue-flash-message';
+
+import VueFlashMessage from 'vue-flash-message';
+Vue.use(VueFlashMessage);
+
+Vue.use(FlashMessage, {
+  messageOptions: {
+    timeout: 1000,
+    important: true,
+    autoEmit: false,
+    pauseOnInteract: true
+  }
+});
+
+
+require('vue-flash-message/dist/vue-flash-message.min.css');
+
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 

@@ -9,10 +9,12 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var createError = require('http-errors');
 
+
+
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+//app.use(cookieParser);
 app.use(cors());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -21,19 +23,29 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 
-/*
-import DataBase from './api/db';
-DataBase.connectToDB();
-*/
 
+
+import {connectToDB} from './api/db';
+connectToDB();
+
+/*
 const registerRoutes= require('./api/register-routes');
 const authRoutes= require('./api/auth-routes');
 const usersRoutes= require('./api/user-routes');
 const blogsRoutes= require('./api/blogs-routes');
-app.use(registerRoutes);
-app.use(authRoutes);
-app.use(usersRoutes);
+
+*/
+
+import registerRoutes from './api/register-routes';
+import authRoutes from './api/auth-routes';
+import blogsRoutes from './api/blogs-routes';
+import userRoutes from './api/user-routes';
+
 app.use(blogsRoutes);
+app.use(registerRoutes);
+app.use(userRoutes);
+app.use(authRoutes);
+
 
 
 // in production it will take the built folder which is a dist and it will serve it a static content

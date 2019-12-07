@@ -19,6 +19,7 @@
       FooterComponent
     },
     beforeCreate() {
+      // make an authentication check
       this.$store.dispatch('authenticate');
     }
   }
