@@ -8,7 +8,7 @@
             <div v-for="blog in blogs" v-bind:key="blog._id" class="card mb-2 ml-2" style="width: 50rem;">
 
                 <h2>{{blog.title}}</h2>
-                <p> Posted in <b><a href="/category">{{blog.category}}</a></b> by {{blog.author}} on {{blog.date}} </p>
+                <p> Posted in <b><router-link :to="{name: 'show-category', params:{category: blog.category}}"   exact >{{blog.category.toUpperCase()}}</router-link></b> by <b>{{blog.author}}</b> on {{blog.date}} </p>
                 <img id="img" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
                 <p>{{blog.body}}</p>
                 <!-- src="../../assets/logo.png"    -->

@@ -12,11 +12,13 @@
 <script>
   import NavBar from './components/NavBar.vue';
   import FooterComponent from './components/FooterComponent';
+
   export default {
     name: 'app',
     components: {
       NavBar,
-      FooterComponent
+      FooterComponent,
+
     },
     beforeCreate() {
       // make an authentication check
@@ -26,6 +28,22 @@
 
 </script>
 
-<style>
+<style  >
+
+    div#app-container{
+        position: fixed;
+       /* border: 3px blue solid;*/
+        top: 50px;
+        left: 0;
+        bottom: 100px;
+        width: 100%;
+        padding: 2rem;
+
+
+        /* background-color: #4A4B4C;*/
+        overflow: auto; /*for scrolling*/
+
+
+    }
 
 </style>

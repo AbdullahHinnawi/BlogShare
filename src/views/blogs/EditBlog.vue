@@ -17,7 +17,7 @@
                             v-bind:title="category.name"
                             v-bind:value="category.name"
                     >
-                        {{ category.name }}
+                        {{ category.name.toUpperCase() }}
                     </option>
                 </select>
 
@@ -30,7 +30,8 @@
 
 
             <div class="form-group">
-                <p>If you would like to keep the current image, LEAVE "Choose file" EMPTY!!</p>
+                <b-alert show variant="warning">If you would like to keep the current image, <b>LEAVE </b> "Choose file" <b> EMPTY!</b></b-alert>
+
                 <label for="image">Image</label>
                 <input :v-model="blog.image" type="file" id="image" name="imageFile" accept="image/*" @change="getImage" ref="imageFile">
             </div>
@@ -127,8 +128,8 @@
     methods:{
       getImage(event){
         this.blog.image= event.target.files[0];
-        window.console.log('image');
-        window.console.log(this.blog.image);
+        window.console.log('Image: ', this.blog.image);
+
       },
       onSubmit:  function(){
         const blogId = this.blog.blogId;
@@ -143,19 +144,7 @@
         formData.append('author', auth.getUsername());
         formData.append('imageFile', this.blog.image);
         formData.append('blogId', blogId);
-        window.console.log('THIS:BLOG______');
-        window.console.log(formData);
-
-        /*
-        const edited ={
-          title:this.blog.title,
-          body: this.blog.body,
-         category: this.blog.category,
-        };
-        window.console.log('edited');
-        window.console.log(edited);
-        */
-
+        window.console.log('THIS:BLOG______', formData);
 
         let options = {
           headers:{
@@ -169,21 +158,20 @@
         };
 
          axios.put('http://localhost:3000/api/myBlogs/'+blogId,formData,options).then((res) =>{
-          window.console.log('res.data');
-          window.console.log(res);
+          window.console.log('res.data', res);
+           this.$router.push({name: 'myblogs'});
+
 
         }).catch((err) =>{
-          window.console.log('errrrrrrrrrrrrrrrrrrrroooooooooooor');
-          window.console.log(err);
+          window.console.log('errrrrrrrrrrrrrrrrrrrroooooooooooor', err);
+
 
         });
 
-        this.$router.push({name: 'myblogs'});
       },
       getCategoryValue(){
         this.blog.category = this.$refs.category.value;
-        window.console.log('this.$refs');
-        window.console.log(this.$refs.category.value);
+        window.console.log('-------this.$refs.category.value:',this.$refs.category.value);
       }
 
     }

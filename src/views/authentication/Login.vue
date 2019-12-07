@@ -1,7 +1,8 @@
 <template>
     <div>
-        <h1>Login</h1>
+
         <form class="custom-form" v-on:submit.prevent="onSubmit">
+            <h1>Login</h1>
             <div class="form-group">
                 <label for="username">Username</label>
                 <input v-model="username" type="text" class="form-control" id="username" placeholder="Username">

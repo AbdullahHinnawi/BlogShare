@@ -78,3 +78,42 @@
 
 
 </script>
+
+<style scoped>
+    nav.navbar{
+        height: 4rem;
+    }
+    a.navbar-brand{
+        /*text-transform: uppercase;
+        letter-spacing: 1px;*/
+    }
+    li.nav-item a {
+        text-transform: uppercase;
+    }
+    #nav-username {
+        text-transform: none;
+    }
+    @media screen and (max-width: 767px) {
+        div#navbarCollapse{
+            /* background-color: #001943 !important;*/
+            background-color: #0d47a1 !important;
+            /*  background-color: #FFD100 !important;*/
+            width: 100%;
+            position: fixed;
+            top: 60px;
+            left: 0;
+            padding-left: 20px;
+            padding-bottom: 5px;
+        }
+
+    }
+    .custom-bg-dark {
+        /* to overide bootstrap use important*/
+        /* background-color: #001943 !important;*/
+        background-color: #0d47a1 !important;
+
+
+    }
+
+
+</style>

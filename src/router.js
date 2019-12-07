@@ -9,6 +9,7 @@ import AllBlogs from './views/blogs/AllBlogs.vue'
 import EditBlog from './views/blogs/EditBlog.vue'
 import ShowBlog from './views/blogs/ShowBlog'
 import MyBlogs from './views/blogs/MyBlogs';
+import ShowCategory from './views/blogs/ShowCategory';
 import * as auth from './authService';
 
 
@@ -106,6 +107,19 @@ const routes = new Router({
         next('/login');
       }
     }
+   },
+   {
+     path: '/categories/show/:category',
+     name: 'show-category',
+     component: ShowCategory,
+     beforeEnter:(to, from, next) =>{
+       if(auth.isLoggedIn()){
+         next();
+       }else{
+         next('/login');
+       }
+     }
+
    },
    {
     path: '/register',

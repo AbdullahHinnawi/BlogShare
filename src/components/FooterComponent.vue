@@ -17,4 +17,17 @@
 
 <style scoped>
 
+    footer#custom-footer{
+        height: 6rem;
+        background-color: #373f46;
+
+        font-size: 1rem;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
 </style>

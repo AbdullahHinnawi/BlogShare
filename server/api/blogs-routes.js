@@ -174,6 +174,14 @@ router.post('/api/categories/add',auth.requireLogin, (req,res) =>{
 
 });
 
+// Get a category
+router.get('/api/categories/show/:category', auth.requireLogin, (req,res)=>{
+  Blog.find({category: req.params.category},function(err, blogs){
+    if(err) return console.log(err);
+    return res.status(200).json({blogs: blogs})
+  }).populate('author,', 'username', 'user');
+});
+
 // ********    CREATE A NEW BLOG   *********
 //auth.requireLogin: every time the user tries to access this endpoint
 //it will run, check for the token and make sure that the
@@ -357,7 +365,7 @@ router.put('/api/myblogs/:id',auth.requireLogin,upload.single('imageFile'),funct
     }
 
     */
-    if(req.file && req.file !== undefined) {
+    if(req.file !== undefined) {
       console.log('Including An Image File');
 
       Blog.update({_id: req.body.blogId}, {
