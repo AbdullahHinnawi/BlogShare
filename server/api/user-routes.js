@@ -1,4 +1,5 @@
 //const express = require('express');
+/*
 import express from 'express';
 const router = express.Router();
 
@@ -11,3 +12,4 @@ router.get('/api/user',function(req,res){
 //module.exports= router;
 export default router;
 //module.exports= User;
+*/

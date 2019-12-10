@@ -22,6 +22,7 @@ router.post('/api/auth',function(req,res){
           if(!passwordsMatch){
             return res.status(401).json();
           }
+          // get the generated token and send it as a response
           const token = generateJWT(user);
           return res.status(200).json({token: token});
 

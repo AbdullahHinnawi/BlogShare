@@ -22,6 +22,8 @@ export function login(user){
 }
 export function logout(){
   localStorage.clear();
+  //call the action which type is 'authenticate' in the store, then action will call the mutations,
+  // and then mutations will update the state
   store.dispatch('authenticate');
 }
 
@@ -60,7 +62,7 @@ export function getUserId(){
 export function http(){
   // create a new request
   return axios.create({
-    baseURL: store.state.apiUrl,
+    baseURL: 'http://localhost:3000/api',
     headers:{
       Authorization: getToken(),
     }

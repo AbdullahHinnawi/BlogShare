@@ -154,7 +154,7 @@
           this.message = 'Blog Created Successfully!';
           this.showDismissibleAlert= false;
           this.showDismissibleAlertSuccess= true;
-          this.$router.push({name: 'all-blogs'});
+         // this.$router.push({name: 'all-blogs'});
 
         }else{
           this.message = 'Editor Field Is Empty!';

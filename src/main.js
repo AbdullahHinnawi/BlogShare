@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 // to bring bootstrap library
-// the line 6026 in this library has been modified and replaced
+// .modal-backdrop in this library has been modified and replaced
 // with "background-color: rgba(0, 0, 0, 0.5);"  by Abdullah Hinnawi in order to
 // preview the modal in the right way
 // *** use Command + press on bootstrap.css to open the file

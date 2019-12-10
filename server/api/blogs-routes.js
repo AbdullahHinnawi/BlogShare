@@ -151,7 +151,7 @@ router.post('/api/categories/add',auth.requireLogin, (req,res) =>{
       console.log("ERROR");
       return res.status(500).json({error: error});
     }
-    if(categories.length < 9){
+    if(categories.length < 14){
       console.log('Categories Number: ', categories.length);
       Categories.findOne({name: req.body.name.toLowerCase()}, (error, category) =>{
         if(error){
@@ -236,10 +236,10 @@ router.post('/api/blogs',auth.requireLogin,upload.single('imageFile'), (req,res)
     blog1.save(function(err,blog){
       if(err) return console.log(err);
       console.log(blog.title + " saved to blogs collection");
-      // res.send(blog);
+       res.send(blog);
     });
 
-    res.send(blog1);
+   // res.send(blog1);
 
   });
 
@@ -444,7 +444,7 @@ router.delete('/api/myblogs',auth.requireLogin, function(req, res) {
 
       Blog.deleteOne({_id:req.query.id}, error =>{
         if(error){
-          return res.status(500).json();
+          return res.status(500).json({message: error});
         }
         return res.status(204).json({message: 'Blog DELETED Successfully!'});
       })

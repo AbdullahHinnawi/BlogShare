@@ -37,11 +37,12 @@ export default {
   components: {
    // HelloWorld
   },
+  /*
   beforeCreate: function() {
    fetch('http://localhost:3000/api/user')
    .then(res=> window.console.log(res)) ;
   }
-
+*/
 
 }
 </script>

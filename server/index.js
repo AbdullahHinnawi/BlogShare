@@ -39,11 +39,11 @@ const blogsRoutes= require('./api/blogs-routes');
 import registerRoutes from './api/register-routes';
 import authRoutes from './api/auth-routes';
 import blogsRoutes from './api/blogs-routes';
-import userRoutes from './api/user-routes';
+//import userRoutes from './api/user-routes';
 
 app.use(blogsRoutes);
 app.use(registerRoutes);
-app.use(userRoutes);
+//app.use(userRoutes);
 app.use(authRoutes);
 
 
