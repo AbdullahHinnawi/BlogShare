@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get('/api/user',function(req,res){
-  return res.status(200).json({message:'HEllo WOrld'});
+  return res.status(200).json({message:'Hello World!'});
 } );
 
 //module.exports= router;

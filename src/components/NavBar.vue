@@ -93,11 +93,34 @@
     #nav-username {
         text-transform: none;
     }
+    .navbar-toggler{
+
+        background: rgb(0,11,36) !important;
+        background: linear-gradient(90deg, rgba(0,11,36,1) 0%, rgba(2,119,189,1) 0%,rgba(13,71,161,1) 100%) !important;
+       /*
+        background: rgb(255,202,40);
+        background: linear-gradient(0deg, rgba(255,202,40,1) 0%, rgba(255,111,0,1) 100%);
+        */
+    }
     @media screen and (max-width: 767px) {
         div#navbarCollapse{
             /* background-color: #001943 !important;*/
-            background-color: #0d47a1 !important;
+           /*background-color: #0d47a1 !important;*/
             /*  background-color: #FFD100 !important;*/
+            /*
+            #f76b1c
+            #fad961
+            */
+            /*
+            background: rgb(0,11,36) !important;
+            background: linear-gradient(90deg, rgba(0,11,36,1) 0%, rgba(13,71,161,1) 0%, rgba(2,119,189,1) 100%) !important;
+            */
+            background: rgb(13,71,161);
+            background: linear-gradient(90deg, rgba(13,71,161,1) 0%, rgba(3,169,244,1) 100%);
+            /*
+            background: rgb(0,11,36);
+            background: linear-gradient(90deg, rgba(0,11,36,1) 0%, rgba(255,111,0,1) 0%, rgba(255,152,0,1) 100%);
+            */
             width: 100%;
             position: fixed;
             top: 60px;
@@ -110,7 +133,16 @@
     .custom-bg-dark {
         /* to overide bootstrap use important*/
         /* background-color: #001943 !important;*/
-        background-color: #0d47a1 !important;
+       /* background-color: #0d47a1 !important;*/
+
+        /*
+        background: rgb(0,11,36) !important;
+        background: linear-gradient(90deg, rgba(0,11,36,1) 0%, rgba(13,71,161,1) 0%, rgba(2,119,189,1) 100%) !important;
+*/
+        background: rgb(13,71,161);
+        background: linear-gradient(90deg, rgba(13,71,161,1) 0%, rgba(3,169,244,1) 100%);
+
+
 
 
     }

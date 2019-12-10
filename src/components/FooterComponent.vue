@@ -19,7 +19,8 @@
 
     footer#custom-footer{
         height: 6rem;
-        background-color: #373f46;
+        /*background-color: #373f46;*/
+        background-color: #4B515D;
 
         font-size: 1rem;
         position: fixed;

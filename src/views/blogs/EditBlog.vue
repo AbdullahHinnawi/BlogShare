@@ -1,6 +1,6 @@
 <template>
     <div id="edit-blog">
-        <h1>Edit Blog</h1>
+        <h2 class="custom-form mb-3">Edit Blog</h2>
         <!-- method="post" action="blogs/create" enctype="multipart/form-data"-->
 
         <form class="custom-form" @submit.prevent="onSubmit">
@@ -23,8 +23,8 @@
 
             </div>
 
-            <div class="form-group">
-                <label for="body">Body</label>
+            <div class="form-group textEditor">
+                <label for="body"></label>
                 <vue-editor v-model="textEditorContent" type="text" id="body" name="body" placeholder="What is in your mind?"></vue-editor>
             </div>
 
@@ -38,7 +38,7 @@
 
 
             <div class="form-group">
-                <button type="submit" name="submit" class="btn btn-secondary">Save Changes</button>
+                <button type="submit" name="submit" class="btn btn-primary">Save Changes</button>
             </div>
 
         </form>
@@ -180,5 +180,25 @@
 </script>
 
 <style scoped>
+
+    input, select{
+        margin-left: 0.5rem;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        padding: 3px 7px;
+    }
+    input[type=file]{
+        border: none !important;;
+    }
+    .textEditor{
+        margin-top: -1.5rem;
+        margin-bottom: 1.2rem;
+        font-weight: normal !important;
+
+    }
+    /* style all input elements with a required attribute */
+    input:required {
+        /* box-shadow: 1px 1px 5px rgba(200, 0, 0, 0.85);*/
+    }
 
 </style>

@@ -75,7 +75,7 @@ const CategorySchema = new mongoose.Schema({
   name: String
 });
 //  use timestamps to know when user was created or updated
-CategorySchema.set('timestamps', true);
+//CategorySchema.set('timestamps', true);
 // compile schema to model
 var Categories = mongoose.model('Categories', CategorySchema, 'categories');
 
@@ -134,7 +134,7 @@ router.get('/api/myblogs', auth.requireLogin, (req,res) =>{
 });
 
 // Get all categories
-router.get('/api/categories', (req,res) =>{
+router.get('/api/categories',auth.requireLogin, (req,res) =>{
   Categories.find(function(err, categories){
     if(err) return console.log(err);
     return res.status(200).json({categories: categories})
@@ -146,31 +146,46 @@ router.get('/api/categories', (req,res) =>{
 router.post('/api/categories/add',auth.requireLogin, (req,res) =>{
   console.log('req.body:');
   console.log(req.body);
-
-  Categories.findOne({name: req.body.name.toLowerCase()}, (error, category) =>{
+  Categories.find({}, (error,categories) =>{
     if(error){
       console.log("ERROR");
       return res.status(500).json({error: error});
     }
-    if(!category && req.body.name !==''){
+    if(categories.length < 9){
+      console.log('Categories Number: ', categories.length);
+      Categories.findOne({name: req.body.name.toLowerCase()}, (error, category) =>{
+        if(error){
+          console.log("ERROR");
+          return res.status(500).json({error: error});
+        }
+        if(!category && req.body.name !==''){
 
-      const category1 = new Categories({name: req.body.name.toLowerCase()});
+          const category1 = new Categories({name: req.body.name.toLowerCase()});
 
-      category1.save(function(err,category){
-        if(err) return console.log(err);
-        console.log(category.name + " saved to categories collection");
-        return res.json({message: "Category Saved Successfully!"});
+          category1.save(function(err,category){
+            if(err) return console.log(err);
+            console.log(category.name + " saved to categories collection");
+            return res.json({message: "Category Saved Successfully!"});
 
+          });
+
+        }else if(req.body.name ===''){
+          console.log("The Input Field Is Empty!");
+          return res.json({message:"The Input Field Is Empty!" });
+        }else{
+          console.log("This Category Is Already Exists!");
+          // 'This Category Is Already Exists!'
+          return res.json({message:"This Category Is Already Exists!" });
+        }
       });
 
-    }else if(req.body.name ===''){
-      return res.json({message:"The Input Field Is Empty!" });
     }else{
-      console.log("This Category Is Already Exists!");
-      // 'This Category Is Already Exists!'
-      return res.json({message:"This Category Is Already Exists!" });
+      console.log("The Allowed Number Of Categories Is 10." );
+      return res.json({message:"The Allowed Number Of Categories Is 10." });
     }
   });
+
+
 
 });
 
@@ -312,7 +327,7 @@ router.post('/api/addcomment', auth.requireLogin, (req, res) =>{
        _id: commentId,
        commentAuthor: req.body.commentAuthor,
        body: req.body.body,
-       commentdate: moment(new Date()).format('LLLL')
+       commentdate: moment(new Date()).format('LLL')
     };
     Blog.update({_id: req.body.blogId},{$push: {comments: comment}},{multi:true}, (error) =>{
       if(error){

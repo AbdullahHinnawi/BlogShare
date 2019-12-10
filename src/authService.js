@@ -13,15 +13,10 @@ export function isLoggedIn(){
 export function login(user){
   return http().post('/auth', user).then(res =>{
     if(res){
-      window.console.log('login res: ');
-      window.console.log(res);
-
-      window.console.log('res.data.token: ');
-      window.console.log(res.data.token);
-
+      window.console.log('login res: ', res);
+      window.console.log('res.data.token: ', res.data.token);
 
       setToken(res.data.token);
-      window.console.log('333333333');
     }
   });
 }
@@ -31,21 +26,18 @@ export function logout(){
 }
 
 
-
-
 // to save the token to the browsers localstorage which
 // will keep the session active
 function setToken(token){
   localStorage.setItem('token', token);
+  // trigger the action which type is 'authenticate' in the store
   store.dispatch('authenticate');
-  window.console.log('222222222222');
+  window.console.log("the action which type is 'authenticate' in the store is triggered");
+
 }
 
 export function getToken(){
- // window.console.log('getToken method authService.js 45');
- // window.console.log(localStorage.getItem('token'));
   return localStorage.getItem('token');
-
 }
 
 export function getUsername(){
@@ -63,6 +55,7 @@ export function getUserId(){
   }
   return token.user.id;
 }
+
 
 export function http(){
   // create a new request

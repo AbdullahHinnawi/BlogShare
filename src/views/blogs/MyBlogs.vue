@@ -1,43 +1,53 @@
 <template>
-    <div class="d-flex flex-column">
-        <h1>My Blogs</h1>
+    <div class="d-flex flex-column justify-content-center">
+        <h2 class="custom-header">My Blogs</h2>
+        <!--
         <div class="mb-4">
-            <router-link to="/create-blog" class="btn btn-success" ml-2 exact >Create Blog</router-link>
+            <router-link to="/create-blog" class="btn btn-primary" ml-2 exact >Create Blog</router-link>
         </div>
-        <div v-if="blogs && blogs.length > 0" class="d-flex flex-wrap justify-content-start">
-            <div v-for="blog in blogs" v-bind:key="blog._id" class="card mb-2 ml-2" style="width: 50rem;">
-
-                <h2>{{blog.title}}</h2>
-                <p> Posted in <b><a href="/category">{{blog.category}}</a></b> by <b>{{blog.author}}</b> on {{blog.date}} </p>
-                <img id="img" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
-                <p class="card-text">{{blog.body}}</p>
-                <!-- src="../../assets/logo.png"    -->
-                <div v-if="blog.authorId === $store.state.userId" class="d-flex mb-4">
-                    <!-- router-link trigger modal -->
-                    <span><router-link :to="{name: 'edit-blog', params:{id: blog._id}}" type="button" tag="button" class=" card-link btn btn-primary ml-4 " exact >Edit</router-link></span>
-                    <span><a v-on:click.prevent="currentBlogId = blog._id" href="#" class="btn btn-danger ml-4"  v-b-modal.modal-1>Delete</a></span>
+        -->
+        <div v-if="blogs && blogs.length > 0" class="d-flex flex-wrap justify-content-center">
+            <div v-for="blog in blogs" v-bind:key="blog._id" class="card mb-2 ml-2 p-4" style="width: 32rem;">
+            <div class="card-in">
+                <h2 class="blog-title">{{blog.title}}</h2>
+                <p> <img class="taglogo" src="../../assets/taglogo.png" alt="tag logo"> <b><router-link :to="{name: 'show-category', params:{category: blog.category}}" style="color: #0d47a1;"   exact >{{blog.category.toUpperCase()}}</router-link></b></p>
+                <p class="blog-author">By <b>{{blog.author}}</b></p>
+                <p class="blog-date">On {{blog.date}} </p>
+                <div class="embed-responsive embed-responsive-4by3">
+                <img class="card-img-top embed-responsive-item" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
                 </div>
+                <p class="blog-body">{{blog.body}}</p>
+                <!-- src="../../assets/logo.png"    -->
+                <div v-if="blog.authorId === $store.state.userId" class="d-flex editDeleteDiv">
+                    <!-- router-link trigger modal -->
+                    <span><router-link :to="{name: 'edit-blog', params:{id: blog._id}}" type="button" tag="button" class=" card-link btn btn-primary"  exact >Edit</router-link></span>
+                    <a v-on:click.prevent="currentBlogId = blog._id" class="card-link btn btn-danger ml-4" href="#" v-b-modal.modal-1>Delete</a>
+
+                </div>
+
             </div>
+
+            </div>
+
         </div>
 
         <!-- Modal   -->
         <div>
-
-            <b-modal id="modal-1" ref="modal" centered  title="Delete Confirmation">
+            <b-modal id="modal-1" class="modal-backdrop" ref="modal" centered  title="Delete Confirmation">
                 <p class="my-4">Are you sure, you would like to delete this blog?</p>
-                <div slot="modal-footer" class="w-100 text-right">
-                    <b-btn @click="deleteBlog" slot="md" class="mr-4" variant="danger">Delete</b-btn>
-                    <b-btn @click="cancelModal" slot="md" variant="secondary">Cancel</b-btn>
+                <div slot="modal-footer" class=" w-100 text-right">
+                    <b-btn @click="deleteBlog" class="mr-4"  slot="md" variant="danger"  >Delete</b-btn>
+                    <b-btn @click="cancelModal" slot="md" class="mr-2"  variant="secondary">Cancel</b-btn>
 
                 </div>
             </b-modal>
+
+
         </div>
 
 
-
-
-        <div v-if="blogs && blogs.length === 0" class="ml-2">
-            <div class="alert alert-info">No blogs Found.</div>
+        <div v-if="blogs && blogs.length === 0" class="ml-2" style="max-width: 35rem;">
+            <div class="alert alert-info">No Blogs Found.</div>
         </div>
 
 
@@ -54,7 +64,11 @@
       return {
         blogs: null,
         currentBlogId:null,
-        receivedImage:null
+        receivedImage:null,
+        dismissSecs: 3,
+        dismissCountDown: 0,
+        showDismissibleAlert: false,
+        showDismissibleAlertSuccess: false
       }
     },
     async beforeRouteEnter(to, from, next){
@@ -128,9 +142,31 @@
 
 <style scoped>
 
-    img{
-        width: 100%;
+    .taglogo{
+        width: 18px;
+        height: 18px;
     }
+    .blog-author, .blog-date{
+        line-height: 7px;
+        color: #262626;
+    }
+    .btn-danger:hover{
+        background-color: darkred  !important;
+    }
+    .btn-secondary:hover{
+        background-color: #3E4551  !important;
+    }
+    .blog-body{
+        margin-top: 1rem;
+        margin-bottom: 3.5rem;
+        text-align: justify;
+
+    }
+    .editDeleteDiv{
+        /*  margin-bottom: 0.3rem !important;*/
+        position: absolute;
+        bottom: 1.5rem;
 
 
+    }
 </style>

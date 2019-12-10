@@ -16,7 +16,7 @@ router.get('/api/users/:username', function(req, res){
     if(!user){
       return res.status(200).json({message: false});
     }else{
-      return res.status(200).json({message: true});
+      return res.status(200).json({message:true});
     }
   });
 

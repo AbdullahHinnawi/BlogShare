@@ -1,30 +1,29 @@
 <template>
     <div id="add-category">
-        <h1>Add Category</h1>
-        <!-- method="post" action="blogs/create" enctype="multipart/form-data"-->
 
+        <!-- method="post" action="blogs/create" enctype="multipart/form-data"-->
+        <h2 class="custom-form">Add Category</h2>
         <form class="custom-form" @submit.prevent="onSubmit">
+
             <div class="form-group">
                 <label for="category">Category Name</label>
-                <input v-model="category.name"  type="text" id="category" name="category"/>
+                <input v-model="category.name" class="form-control"  type="text" id="category" name="category" placeholder="Category Name" required/>
             </div>
             <div class="form-group">
-                <button type="submit" name="submit" class="btn btn-secondary">Save</button>
-            </div>
-
-            <!--ALERT-->
-            <div>
-                <b-alert v-model="showDismissibleAlert" dismissible variant="danger" class="m-2">
-                    {{message}}
-                </b-alert>
-                <b-alert v-model="showDismissibleAlertSuccess" dismissible variant="success" class="m-2">
-                    {{message}}
-                </b-alert>
-
+                <button type="submit" name="submit" class="btn btn-primary">Save</button>
             </div>
 
         </form>
+        <!--ALERT-->
+        <div>
+            <b-alert v-model="showDismissibleAlert" dismissible variant="danger" class="m-2">
+                {{message}}
+            </b-alert>
+            <b-alert v-model="showDismissibleAlertSuccess" dismissible variant="success" class="m-2">
+                {{message}}
+            </b-alert>
 
+        </div>
 
 
 
@@ -78,6 +77,10 @@
           } else if(res.data.message === "The Input Field Is Empty!") {
             this.showDismissibleAlertSuccess = false;
             this.showDismissibleAlert = true;
+          }else if (res.data.message === "The Allowed Number Of categories Is 10."){
+            this.showDismissibleAlertSuccess = false;
+            this.showDismissibleAlert = true;
+
           }else{
             this.showDismissibleAlertSuccess = false;
             this.showDismissibleAlert = true;
@@ -101,6 +104,7 @@
 
 
 <style scoped>
+
 
 
 </style>

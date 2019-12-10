@@ -23,6 +23,7 @@
     beforeCreate() {
       // make an authentication check
       this.$store.dispatch('authenticate');
+      window.console.log('Making an authentication check:',   this.$store.dispatch('authenticate'));
     }
   }
 
@@ -32,15 +33,18 @@
 
     div#app-container{
         position: fixed;
-       /* border: 3px blue solid;*/
-        top: 50px;
+      /* border: 3px blue solid;*/
+        top: 64px;
         left: 0;
-        bottom: 100px;
+        bottom: 96px;
         width: 100%;
         padding: 2rem;
+        margin-right: auto;
+        margin-left: auto;
 
 
-        /* background-color: #4A4B4C;*/
+
+
         overflow: auto; /*for scrolling*/
 
 

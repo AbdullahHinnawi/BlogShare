@@ -15,9 +15,9 @@ export default new Vuex.Store({
   mutations: {
     authenticate(state){
       state.isLoggedIn = auth.isLoggedIn();
-      window.console.log('the store isLoggedIN: ' + state.isLoggedIn);
+      window.console.log('Vuex.Store.state.isLoggedIn: ' + state.isLoggedIn);
       if(state.isLoggedIn){
-        window.console.log('STORE 2  isLoggedIN: ' + state.isLoggedIn);
+        window.console.log('Vuex.Store.state.isLoggedIn:isTRUE: ' + state.isLoggedIn);
         state.username = auth.getUsername();
         state.userId = auth.getUserId();
       }else{
@@ -29,6 +29,7 @@ export default new Vuex.Store({
   actions: {
     authenticate(context){
       context.commit('authenticate');
+      window.console.log('authenticate##############:');
     }
   },
   modules: {

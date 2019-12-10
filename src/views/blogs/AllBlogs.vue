@@ -1,24 +1,38 @@
 <template>
-    <div class="d-flex flex-column">
-        <h1>All Blogs</h1>
-        <div class="mb-4">
-            <router-link to="/create-blog" class="btn btn-success" ml-2 exact >Create Blog</router-link>
-        </div>
-        <div v-if="blogs && blogs.length > 0" class="d-flex flex-wrap justify-content-start">
-            <div v-for="blog in blogs" v-bind:key="blog._id" class="card mb-2 ml-2" style="width: 50rem;">
 
-                <h2>{{blog.title}}</h2>
-                <p> Posted in <b><router-link :to="{name: 'show-category', params:{category: blog.category}}"   exact >{{blog.category.toUpperCase()}}</router-link></b> by <b>{{blog.author}}</b> on {{blog.date}} </p>
-                <img id="img" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
-                <p>{{blog.body}}</p>
-                <!-- src="../../assets/logo.png"    -->
-                <div>
-                    <router-link :to="{name: 'show-blog', params:{id: blog._id}}" class="btn btn-success m-3"  exact >Read More...</router-link>
+    <div class="d-flex flex-column justify-content-center">
+        <h2 class="custom-header">All Blogs</h2>
+        <!--
+        <div class="mb-4">
+            <router-link to="/create-blog" class="btn btn-primary" ml-2 exact >Create Blog</router-link>
+        </div>
+        -->
+        <div v-if="blogs && blogs.length > 0" class="d-flex flex-wrap justify-content-center">
+            <div v-for="blog in blogs" v-bind:key="blog._id" class="card mb-2 ml-2 p-4" style="width: 32rem;">
+
+                <div class="card-in">
+                    <h2 class="blog-title">{{blog.title}}</h2>
+                    <p> <img class="taglogo" src="../../assets/taglogo.png" alt="tag logo"> <b><router-link :to="{name: 'show-category', params:{category: blog.category}}" style="color: #0d47a1;"   exact >{{blog.category.toUpperCase()}}</router-link></b></p>
+                    <p class="blog-author">By <b>{{blog.author}}</b></p>
+                    <p class="blog-date">On {{blog.date}} </p>
+                    <div class="embed-responsive embed-responsive-4by3">
+                    <img class="card-img-top embed-responsive-item" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
+                    </div>
+                    <p class="blog-body">{{blog.body | truncate(300)}}</p>
+                    <!-- src="../../assets/logo.png"    -->
+                    <div>
+                        <router-link :to="{name: 'show-blog', params:{id: blog._id}}" class="btn btn-primary readMoreBtn"  exact >Read More...</router-link>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <div v-if="blogs && blogs.length === 0" class="ml-2" style="max-width: 35rem;">
+            <div class="alert alert-info">No Blogs Found.</div>
+        </div>
+
     </div>
+
 </template>
 
 <script>
@@ -65,9 +79,28 @@
 
 
 <style scoped>
-
-    img{
-        width: 100%;
+    .taglogo{
+        width: 18px;
+        height: 18px;
     }
+    .blog-author, .blog-date{
+        line-height: 7px;
+        color: #262626;
+    }
+    .blog-body{
+        margin-top: 1rem;
+        margin-bottom: 3.5rem;
+        text-align: justify;
+    }
+    .readMoreBtn{
+      /*  margin-bottom: 0.3rem !important;*/
+        position: absolute;
+        bottom: 1.5rem;
+
+
+    }
+
+
+
 
 </style>

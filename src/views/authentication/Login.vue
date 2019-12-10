@@ -1,8 +1,8 @@
 <template>
-    <div>
-
+    <div class="login-div">
+        <h2 class="custom-form">Log In</h2>
         <form class="custom-form" v-on:submit.prevent="onSubmit">
-            <h1>Login</h1>
+
             <div class="form-group">
                 <label for="username">Username</label>
                 <input v-model="username" type="text" class="form-control" id="username" placeholder="Username">
@@ -12,7 +12,7 @@
                 <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary">Log In</button>
             </div>
 
             <!--ALERT-->
@@ -76,12 +76,9 @@
 
 <style scoped>
 
-    form.custom-form{
-        max-width:40rem ;
-        display: flex;
-        flex-direction:column;
-        margin-left: auto;
-        margin-right: auto;
-    }
+
+
+
+
 
 </style>

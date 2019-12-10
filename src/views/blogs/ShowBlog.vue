@@ -1,44 +1,56 @@
 <template>
-    <div class="d-flex flex-column">
-        <h1>Show Blog</h1>
-        <div v-if="blog" class="d-flex flex-wrap justify-content-start">
-            <div class="card mb-2 ml-2" style="width: 50rem;">
+    <div class="d-flex flex-column justify-content-center">
+        <h2 class="custom-header">Show Blog</h2>
+        <div v-if="blog" class="d-flex flex-wrap justify-content-center">
 
-                <h2>{{blog.title}}</h2>
-                <p> Posted in <b><a href="/category">{{blog.category}}</a></b> by {{blog.author}} on {{blog.date}} </p>
-                <img id="img" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
-                <p>{{blog.body}}</p>
-                <!-- src="../../assets/logo.png"    -->
+            <div class="card mb-2 ml-2 p-4" style="width: 40rem;">
 
-                <div v-if="blog.comments && blog.comments.length>0">
+                <h2 class="blog-title">{{blog.title}}</h2>
+                <p class="blog-category"> <img class="taglogo" src="../../assets/taglogo.png" alt="tag logo"> <b><router-link :to="{name: 'show-category', params:{category: blog.category}}" style="color: #0d47a1;"   exact >{{blog.category.toUpperCase()}}</router-link></b></p>
+                <p class="blog-author">By <b>{{blog.author}}</b></p>
+                <p class="blog-date">On {{blog.date}} </p>
+                <div class="embed-responsive embed-responsive-4by3">
+                <img class="card-img-top embed-responsive-item" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
+                </div>
+                <p class="blog-body">{{blog.body}}</p>
+
+                <div>
+                    <h4>Add Comment</h4>
+
+                    <form @submit.prevent="submitComment">
+                        <div class="form-group">
+
+                            <textarea v-model="comment.body" class="form-control commentBody" id="commentBody" type="text"  name="commentBody" placeholder="Input your comment"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="submit" class="btn btn-primary commentBtn">Comment</button>
+                        </div>
+                    </form>
+
+                </div>
+
+                <p><a class="control" v-on:click="showComments = !showComments" href="#com-div" ref="viewComments">View all comments</a></p>
+
+
+                <div id="hide" v-show="showComments" v-if="comments && comments.length>0">
                     <h3>Comments</h3>
-                    <div v-for="comment in blog.comments" v-bind:key="comment._id" class="card-footer m-2">
-                        <p>{{comment.commentAuthor}}</p>
+                    <div v-for="comment in comments" v-bind:key="comment._id" class="card-footer">
+                        <p class="comment-auhtor"><b>{{comment.commentAuthor}}</b></p>
+                        <p class="comment-date">{{comment.commentdate}}</p>
                         <p>{{comment.body}}</p>
 
                     </div>
                 </div>
 
 
+
+
             </div>
 
 
 
 
-            <div class=" card mb-5 ml-2" style="width: 50rem;">
-                <h3>Add comment</h3>
-                <br>
-                <form class="custom-form" @submit.prevent="submitComment">
-                    <div class="form-group">
-                        <!-- <label for="commentBody">Comment</label>  -->
-                        <textarea v-model="comment.body" id="commentBody" type="text" class="card mb-2 ml-2" name="commentBody" placeholder="Add your comment"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" name="submit" class="btn btn-secondary m-2">Add Comment</button>
-                    </div>
-                </form>
 
-            </div>
 
         </div>
 
@@ -53,13 +65,15 @@
     data: function(){
       return {
         blog:null,
+        comments: null,
         receivedImage:null,
         comment:{
           commentAuthor:'',
           body:'',
           commentDate:''
         },
-        BlogId:null
+        BlogId:null,
+        showComments: false
       }
     },
     async beforeRouteEnter(to, from, next){
@@ -73,12 +87,15 @@
           }
         });
         //const data =  res.data;
-        window.console.log('ShowBlog res.data');
-        window.console.log(res.data);
+        window.console.log('ShowBlog res.data', res.data);
+        const commentsArray = res.data.blog.comments;
+        const reversedCommentsArray = commentsArray.reverse();
+        window.console.log('Reverserd Comments Array', reversedCommentsArray);
+
 
         next(vm => {vm.blog = res.data.blog;
-        vm.blogId= res.data.blog._id});
-
+        vm.blogId= res.data.blog._id;
+        vm.comments = reversedCommentsArray});
 
       }catch(err){
         window.console.log(err);
@@ -116,15 +133,54 @@
         });
 
 
-      }
+      },
+
     }
   };
 </script>
 
 <style scoped>
-
-    img{
-        width: 100%;
+    .taglogo{
+        width: 18px;
+        height: 18px;
     }
+    .blog-author{
+        line-height: 7px;
+        color: #2E2E2E;
+    }
+    .blog-date{
+        line-height: 7px;
+        color: #4B515D;
+    }
+    .blog-body{
+        margin-top: 1rem;
+        text-align: justify;
+    }
+    .commentBody{
+        max-width: 30rem;
+        margin-top: 0.7rem !important;
+
+    }
+    .commentBtn{
+
+    }
+    .comment-auhtor{
+        line-height: 7px;
+        color:  #4B515D;
+        font-size: 1.2rem !important;
+
+    }
+    .comment-date{
+        line-height: 7px;
+        color:  #4B515D;
+        font-size: 12px;
+
+    }
+
+    @media screen and (max-width: 400px) {
+
+
+    }
+
 
 </style>
