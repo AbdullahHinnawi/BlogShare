@@ -35,7 +35,7 @@ npm run lint
 
 ### Customize configuration
 
-##Rest API Requests
+## Rest API Requests
 
 ### Request to get all blogs
 GET /api/blogs
