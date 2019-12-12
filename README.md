@@ -44,7 +44,7 @@ http://localhost:3000/api/blogs
 ```
 #### Headers
 Authorization: token
-content-type: "application/json; charset=utf-8" 
+content-type: "application/json" 
 
 #### Response: 
 status: 200  
@@ -90,6 +90,7 @@ http://localhost:3000/api/blogs/show/:id
 ```
 #### Headers
 Authorization: token
+content-type: "application/json" 
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
@@ -151,7 +152,7 @@ req.query: id
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
-data: {message: 'Blog DELETED Successfully!' | error}
+data: {message: 'Blog DELETED Successfully!'}
 
 
 
@@ -258,7 +259,7 @@ req.body: newUser
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
-data: {{message: "Registered Successfully! "}}
+data: {message: "Registered Successfully! "}
 
 
 ### Request to log in
@@ -272,7 +273,7 @@ req.body: user credentials
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
-data: {{token:token}}
+data: {token:token}
 
 
 
