@@ -43,14 +43,14 @@ GET /api/blogs
 http://localhost:3000/api/blogs
 ```
 #### Headers
-Authorization: token
+Authorization: token  
 content-type: "application/json" 
 
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
 data: blogs  
-For example response.data looks like the following json object  
+For example response.data looks like the following json object : 
 {
     "blogs": [  
         {  
@@ -89,7 +89,7 @@ GET /api/blogs/show/:id
 http://localhost:3000/api/blogs/show/:id
 ```
 #### Headers
-Authorization: token
+Authorization: token  
 content-type: "application/json" 
 #### Response: 
 status: 200  
@@ -102,10 +102,10 @@ POST /api/blogs
 http://localhost:3000/api/blogs
 ```
 #### Headers
-'Content-Type': 'multipart/form-data'
-Authorization: token
-req.body: form data object
-req.file: image file info
+'Content-Type': 'multipart/form-data'  
+Authorization: token  
+req.body: form data object  
+req.file: image file info  
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
@@ -117,9 +117,9 @@ GET /api/myblogs
 'http://localhost:3000/api/myblogs?userId='+userId
 ```
 #### Headers
-content-type: "application/json; charset=utf-8" 
-Authorization: token  
-req.query: userId
+content-type: "application/json; charset=utf-8"   
+Authorization: token    
+req.query: userId  
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
@@ -133,7 +133,7 @@ PUT /api/myblogs/:id
 #### Headers
 'Content-Type': 'multipart/form-data'  
 Authorization: token  
-req.body: formData (blog info)
+req.body: formData (blog info)  
 req.file: image file | undefined if the user left it empty
 #### Response: 
 status: 200  
@@ -168,35 +168,35 @@ Authorization: token
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
-data: {categories: categories}
+data: {categories: categories}  
 For example response.data looks like the following json object 
-{
-    "categories": [
-        {
-            "_id": "5df004f48c97594603614104",
-            "name": "technology",
-            "__v": 0
-        },
-        {
-            "_id": "5df004fe8c97594603614105",
-            "name": "business",
-            "__v": 0
-        },
-        {
-            "_id": "5df005068c97594603614106",
-            "name": "nature",
-            "__v": 0
-        }
-    ]
-}
+{  
+    "categories": [  
+        {  
+            "_id": "5df004f48c97594603614104",  
+            "name": "technology",  
+            "__v": 0  
+        },  
+        {  
+            "_id": "5df004fe8c97594603614105",    
+            "name": "business",  
+            "__v": 0  
+        },    
+        {  
+            "_id": "5df005068c97594603614106",  
+            "name": "nature",  
+            "__v": 0  
+        }  
+    ]  
+}  
 ### Request to add a category
 POST /api/categories/add
 ```
 http://localhost:3000/api/categories/add
 ```
 #### Headers
-Authorization: token
-req.body: category object
+Authorization: token  
+req.body: category object  
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
@@ -209,8 +209,8 @@ POST /categories/show/:category
 http://localhost:3000/api/categories/show/:category
 ```
 #### Headers
-Authorization: token
-req.params: category
+Authorization: token  
+req.params: category  
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
@@ -222,10 +222,10 @@ POST /api/addcomment
 http://localhost:3000/api/addcomment
 ```
 #### Headers
-Authorization: token
-content-type: "application/json" 
-req.body: comment
-#### Response: 
+Authorization: token  
+content-type: "application/json"   
+req.body: comment  
+#### Response:   
 status: 200  
 content-type: "application/json; charset=utf-8"  
 data: {{message: 'The comment added successfully!'}}
@@ -239,7 +239,7 @@ GET /api/users/:username
 http://localhost:3000//api/users/:username
 ```
 #### Headers
-content-type: "application/json" 
+content-type: "application/json"   
 req.params: username
 #### Response: 
 status: 200  
@@ -254,8 +254,8 @@ POST /api/register
 http://localhost:3000/api/register
 ```
 #### Headers
-content-type: "application/json" 
-req.body: newUser
+content-type: "application/json"   
+req.body: newUser  
 #### Response: 
 status: 200  
 content-type: "application/json; charset=utf-8"  
@@ -268,9 +268,9 @@ POST /api/auth
 http://localhost:3000/api/auth
 ```
 #### Headers
-content-type: "application/json" 
-req.body: user credentials
-#### Response: 
+content-type: "application/json"   
+req.body: user credentials  
+#### Response:   
 status: 200  
 content-type: "application/json; charset=utf-8"  
 data: {token:token}
