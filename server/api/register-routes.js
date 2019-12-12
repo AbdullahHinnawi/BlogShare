@@ -12,8 +12,9 @@ router.get('/api/users/:username', function(req, res){
   console.log('req.params.username');
   console.log(req.params.username);
   User.findOne({username: req.params.username},function(err, user){
-    if(err) return console.log(err);
-    if(!user){
+    if(err) {
+      return res.status(500).json(err);
+    }else if(!user){
       return res.status(200).json({message: false});
     }else{
       return res.status(200).json({message:true});
@@ -54,7 +55,7 @@ router.post('/api/register',function(req,res) {
           res.status(500).json(error);
         }
 
-        return res.status(201).json({
+        return res.status(200).json({
           message: 'The user has been registered!',
           user: user
         });

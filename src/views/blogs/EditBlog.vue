@@ -80,7 +80,7 @@
       window.console.log(currentBlogId);
       let options = {
         headers:{
-          Authentication: auth.getToken()
+          Authorization: auth.getToken()
         }
       };
       try{
@@ -148,7 +148,7 @@
 
         let options = {
           headers:{
-            Authentication: auth.getToken(),
+            Authorization: auth.getToken(),
             'Content-Type': 'multipart/form-data',
            // 'Content-Type': 'application/json;charset=UTF-8',
             accept: 'application/json',

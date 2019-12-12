@@ -109,14 +109,17 @@ const upload = multer({ storage });
 
 // Get all blogs
 router.get('/api/blogs', auth.requireLogin, (req,res) =>{
+ // console.log('req.headers: ',req.headers);
   Blog.find(function(err, blogs){
     if(err) return console.log(err);
     return res.status(200).json({blogs: blogs})
   }).populate('author,', 'username', 'user');
 });
 
-
 // Get MY BLOGS
+/**
+ *
+ */
 router.get('/api/myblogs', auth.requireLogin, (req,res) =>{
   const authorId = req.query.userId;
   console.log('authorId:');

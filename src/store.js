@@ -27,8 +27,10 @@ export default new Vuex.Store({
   },
   actions: {
     authenticate(context){
-      context.commit('authenticate');
-      window.console.log('authenticate##############:');
+      window.console.log("Trigger the action which type is 'authenticate' in the store, action will commit mutations" +
+          " which will update the state");
+      context.commit('authenticate',0);
+
     }
   },
   modules: {

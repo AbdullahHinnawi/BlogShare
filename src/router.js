@@ -39,7 +39,7 @@ const routes = new Router({
     component: AllBlogs,
     // beforeEnter called when '/contact' route matches
     beforeEnter:(to, from, next) =>{
-      window.console.log('router.js 41 isLoggedIN: ' + auth.isLoggedIn);
+      window.console.log('router.js 41 isLoggedIN: ' + auth.isLoggedIn());
       if(auth.isLoggedIn()){
         next();
       }else{

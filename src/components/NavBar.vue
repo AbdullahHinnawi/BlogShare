@@ -2,13 +2,13 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top custom-bg-dark">
         <router-link to="/" class="navbar-brand">
-            <img src="../assets/logo.png" style="max-height: 25px;"/>BlogShare
+            <img src="../assets/1.png" style="height:40px;margin-left:-10px;"/>
         </router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse"  id="navbarCollapse">
-            <ul  class="navbar-nav mr-auto">
+            <ul  class="navbar-nav ml-auto">
                 <li v-if="!$store.state.isLoggedIn" class="nav-item">
                     <router-link to="/" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" exact>
                         Home
@@ -45,7 +45,9 @@
                     </router-link>
                 </li>
                 <li v-if="$store.state.isLoggedIn" class="nav-item">
-                    <a v-on:click.prevent="logout" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="#">Logout</a>
+                    <a v-on:click.prevent="logout" class="nav-link" data-toggle="collapse" data-target=".navbar-collapse.show" href="#">
+                        Logout
+                    </a>
                 </li>
                 <li class="nav-item">
                     <!-- bring in the state username,
@@ -88,10 +90,10 @@
         letter-spacing: 1px;*/
     }
     li.nav-item a {
-        text-transform: uppercase;
+       /* text-transform: uppercase;*/
     }
     #nav-username {
-        text-transform: none;
+       /* text-transform: none;*/
     }
     .navbar-toggler{
 
@@ -139,8 +141,15 @@
         background: rgb(0,11,36) !important;
         background: linear-gradient(90deg, rgba(0,11,36,1) 0%, rgba(13,71,161,1) 0%, rgba(2,119,189,1) 100%) !important;
 */
+        /*
         background: rgb(13,71,161);
         background: linear-gradient(90deg, rgba(13,71,161,1) 0%, rgba(3,169,244,1) 100%);
+        */
+
+        background-color: #0d47a1;
+
+
+
 
 
 

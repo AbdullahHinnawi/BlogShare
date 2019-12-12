@@ -75,10 +75,10 @@
           } else {
             this.showDismissibleAlert= false;
             this.showDismissibleAlertSuccess= true;
+            this.message="Registered! Successfully!";
             const registerPromise = auth.registerUser(user);
             const loginPromise = auth.login(user);
             await Promise.all([registerPromise, loginPromise]);
-            this.message="Registered! Successfully!";
             this.$router.push({name: 'all-blogs'});
           }
 

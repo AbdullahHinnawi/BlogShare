@@ -2,7 +2,7 @@
   <div id="custom-home">
    <!-- <HelloWorld/>-->
     <div class="jumbotron custom-hello-world my-0">
-      <h1 class="display-5">BlogShare</h1>
+      <img src="../assets/1.png" style="height: 60px;">
       <p class="text" style="color:#424242">Welcome to BlogShare application. </p>
 
       <p class="lead">BlogShare is an online magazine or informative website that displays
@@ -58,12 +58,14 @@ max-width: 60rem;
     display: flex;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 3.2rem;
+  /* margin-top: 3.2rem;*/
+   margin-top: 5rem;
+    vertical-align: middle;
     justify-content: center;
     align-items: center;
-   /* border: red solid 3px;*/
+
     box-sizing: border-box;
-    text-align: justify;
+
     text-justify: inter-word;
     color: #1c2a48 ;
 
@@ -97,20 +99,41 @@ background-image: linear-gradient(90deg, #FAD961 0%, #F76B1C 100%);
 
   }
   }
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 960px) {
     div#custom-home{
 
-    /* margin-top: 1.9rem;*/
+     margin-top: 4.5rem;
+
 //margin-top: 1.1rem;
 
     }
 
   }
+  @media screen and (max-width: 890px) {
+    div#custom-home{
+
+      margin-top: 3.2rem;
+     /* border: red solid 3px;*/
+    //margin-top: 1.1rem;
+
+    }
+
+  }
+  @media screen and (max-width: 640px) {
+    div#custom-home {
+
+      margin-top:1rem;
+     /* border: red solid 3px;*/
+      /*margin-top: 1.1rem;*/
+
+    }
+  }
   @media screen and (max-width: 500px) {
     div#custom-home {
 
-      margin-top: -0.29rem;
-    //margin-top: 1.1rem;
+    margin-top: 1.5rem;
+
+    /*margin-top: 1.1rem;*/
 
     }
   }

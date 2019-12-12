@@ -41,6 +41,9 @@
 
                     </div>
                 </div>
+                <div  v-if="comments && comments.length === 0" class="ml-2" style="max-width: 35rem;">
+                    <div class="alert alert-info">This blog has no comments yet!</div>
+                </div>
 
 
 
@@ -118,7 +121,7 @@
             //'Content-Type': 'application/json;charset=UTF-8',
             'Content-Type': 'application/json',
            // accept: 'application/json',
-            Authentication: auth.getToken(),
+            Authorization: auth.getToken(),
           }
         }).then((res) =>{
           window.console.log('res.data');
@@ -167,7 +170,7 @@
     .comment-auhtor{
         line-height: 7px;
         color:  #4B515D;
-        font-size: 1.2rem !important;
+        font-size: 1.1rem !important;
 
     }
     .comment-date{

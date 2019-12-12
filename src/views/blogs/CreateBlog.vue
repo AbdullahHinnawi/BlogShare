@@ -94,7 +94,7 @@
       try{
         const res =  await axios.get('http://localhost:3000/api/categories', {
           headers: {
-            Authentication: auth.getToken(),
+            Authorization: auth.getToken(),
           }
         });
         //const data =  res.data;
@@ -140,7 +140,7 @@
          await axios.post('http://localhost:3000/api/blogs',formData,{
            headers: {
              'Content-Type': 'multipart/form-data',
-              Authentication: auth.getToken(),
+              Authorization: auth.getToken(),
            }
          }).then(function(res){
            window.console.log('res.data');
@@ -154,7 +154,7 @@
           this.message = 'Blog Created Successfully!';
           this.showDismissibleAlert= false;
           this.showDismissibleAlertSuccess= true;
-         // this.$router.push({name: 'all-blogs'});
+          this.$router.push({name: 'all-blogs'});
 
         }else{
           this.message = 'Editor Field Is Empty!';

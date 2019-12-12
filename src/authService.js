@@ -11,13 +11,14 @@ export function isLoggedIn(){
 }
 
 export function login(user){
-  return http().post('/auth', user).then(res =>{
+  return http().post('/auth', user).then(res=>{
     if(res){
       window.console.log('login res: ', res);
       window.console.log('res.data.token: ', res.data.token);
 
       setToken(res.data.token);
     }
+
   });
 }
 export function logout(){
@@ -43,6 +44,7 @@ export function getToken(){
 }
 
 export function getUsername(){
+  // decrypt token to its original data {user: {username: user.username, id: user._id}}
   const token = decodeToken();
   if(!token){
     return null
@@ -51,6 +53,7 @@ export function getUsername(){
 }
 
 export function getUserId(){
+  // decrypt token to its original data {user: {username: user.username, id: user._id}}
   const token = decodeToken();
   if(!token){
     return null
@@ -66,13 +69,14 @@ export function http(){
     headers:{
       Authorization: getToken(),
     }
+
   });
 }
 
 
 export function registerUser(user){
 
-  return http().post('/register', user);
+  return http().post('/register', user).catch(error =>   window.console.log('REGISTRATION ERROR: ', error));
 
 }
 

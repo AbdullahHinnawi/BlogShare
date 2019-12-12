@@ -2,10 +2,14 @@ import jwt from 'jsonwebtoken';
 
 process.env.TOKEN_SECRET = 'my-development-secret';
 export function generateJWT(user){
-  const tokenData = {username: user.username, id: user._id};
+  const tokenData = {username: user.username, password: user.password, id: user._id};
+  // every token you create is going to be signed with the TOKEN_SECRET, so you
+  // need the secret in order to decrypt the token
   return jwt.sign({user: tokenData},process.env.TOKEN_SECRET );
 }
 
+// requireLogin function can be attached to any route that require
+// user to be logged in to access it
 export function requireLogin(req, res,  next){
   const token = decodeToken(req);
   if(!token){
@@ -21,8 +25,7 @@ export function decodeToken(req) {
   if(!token){
     return null;
   }
-
-  // otherwise decrypt that token (the secret is needed to decrypt the token)
+  // otherwise decrypt the token (the secret is needed to decrypt the token)
   try{
     return jwt.verify(token, process.env.TOKEN_SECRET);
   }catch(error){

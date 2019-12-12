@@ -23,7 +23,7 @@
     beforeCreate() {
       // make an authentication check
       this.$store.dispatch('authenticate');
-      window.console.log('Making an authentication check:',   this.$store.dispatch('authenticate'));
+
     }
   }
 

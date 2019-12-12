@@ -62,7 +62,7 @@
         await axios.post('http://localhost:3000/api/categories/add',this.category,{
 
           headers: {
-            Authentication: auth.getToken()
+            Authorization: auth.getToken()
           }
         }).then(async (res) => {
          // let self = this;
@@ -72,7 +72,7 @@
           if (res.data.message === "Category Saved Successfully!") {
             this.showDismissibleAlertSuccess = true;
             this.showDismissibleAlert = false;
-            this.$router.push({name: 'create-blog'});
+           // this.$router.push({name: 'create-blog'});
 
           } else if(res.data.message === "The Input Field Is Empty!") {
             this.showDismissibleAlertSuccess = false;

@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post('/api/auth',function(req,res){
   const validation = validate(req.body);
+  console.log('validation', validation);
   if(!validation.isValid){
     return res.status(400).json({message: validation.message});
   }
@@ -15,13 +16,16 @@ router.post('/api/auth',function(req,res){
           if (error){
             return res.status(500).json();
           }
+
           if(!user){
-            return res.status(401).json();
+            return res.status(401).json({message:"UNAUTHORIZED, User not found!"});
           }
+
           const passwordsMatch = User.passwordMatches(req.body.password, user.password);
           if(!passwordsMatch){
-            return res.status(401).json();
+            return res.status(401).json({message:"Invalid Password!"});
           }
+          console.log('USER INFO', user);
           // get the generated token and send it as a response
           const token = generateJWT(user);
           return res.status(200).json({token: token});

@@ -39,39 +39,68 @@
 
 <script>
     import * as auth from '../../authService';
+   import axios from 'axios';
   export default {
     name: 'Login.vue',
-    data: function(){
+    data: function() {
       return {
-        username:'',
-        password:'',
-        message:'',
+        username: '',
+        password: '',
+        message: '',
         dismissSecs: 10,
         dismissCountDown: 0,
         showDismissibleAlert: false,
         showDismissibleAlertSuccess: false
       }
     },
-    methods:{
+    methods: {
       onSubmit: async function() {
         const user = {
           username: this.username,
           password: this.password
         };
+
+        await axios.get('http://localhost:3000/api/users/' + user.username).then(async res => {
+          window.console.log('res.data.message', res.data.message);
+          if (res.data.message === true) {
+            await auth.login(user);
+            if (this.$store.state.isLoggedIn) {
+              this.showDismissibleAlert = false;
+              this.showDismissibleAlertSuccess = true;
+              this.message = 'Logged in successfully!';
+            }
+            this.$router.push({name: 'all-blogs'});
+          } else {
+            this.showDismissibleAlertSuccess = false;
+            this.showDismissibleAlert = true;
+            this.message = 'Invalid username or password!';
+          }
+
+        }).catch(error => {
+          window.console.log(error);
+        });
+
+
+        /*
         await auth.login(user);
         if(this.$store.state.isLoggedIn){
           this.showDismissibleAlert= false;
           this.showDismissibleAlertSuccess= true;
           this.message='Logged in successfully!';
+
         }else{
          this.showDismissibleAlertSuccess= false;
          this.showDismissibleAlert= true;
           this.message='Invalid username or password!';
         }
         this.$router.push({name: 'all-blogs'});
+        */
+
       }
-    }
-  };
+
+      },
+
+  }
 </script>
 
 <style scoped>
