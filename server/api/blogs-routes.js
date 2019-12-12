@@ -117,9 +117,6 @@ router.get('/api/blogs', auth.requireLogin, (req,res) =>{
 });
 
 // Get MY BLOGS
-/**
- *
- */
 router.get('/api/myblogs', auth.requireLogin, (req,res) =>{
   const authorId = req.query.userId;
   console.log('authorId:');
@@ -289,7 +286,7 @@ router.get('/api/image/:filename', (req,res) =>{
       });
     }
     // check if image
-    if(file.contentType === 'image/jpeg' || file.contentType === 'image/png'){
+    if(file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/*'){
       // read putput to browser
       const readstream = gfs.createReadStream(file.filename);
       readstream.pipe(res);

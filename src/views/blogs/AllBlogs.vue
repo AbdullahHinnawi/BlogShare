@@ -55,8 +55,9 @@
             }
           });
           //const data =  res.data;
-          window.console.log('data');
-          window.console.log(res.data.blogs);
+           window.console.log('res', res);
+            window.console.log('res.data.blogs', res.data.blogs);
+
           // save received blogs to an array
           const array = res.data.blogs;
           window.console.log('array');
