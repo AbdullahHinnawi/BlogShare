@@ -368,6 +368,9 @@ router.put('/api/myblogs/:id',auth.requireLogin,upload.single('imageFile'),funct
   console.log('put request FILE ###');
   console.log(req.file);
 
+  console.log('put Old Image ###');
+  console.log(req.body.oldImage);
+
 /*
   const id = auth.getUserId(req);
   console.log('userId'+id);
@@ -383,6 +386,27 @@ router.put('/api/myblogs/:id',auth.requireLogin,upload.single('imageFile'),funct
     if(req.file !== undefined) {
       console.log('Including An Image File');
 
+      // FIRST:  delete the Old image from the database
+      gfs.files.findOne({filename: req.body.oldImage}, (err, file) =>{
+        // ckeck if file
+        if(!file || file.length === 0){
+          return res.status(404).json({
+            err:'no file exist'
+          });
+        }
+        // file exists
+        console.log('The Old Image File: ', file);
+        // remove the old image file from both chunks and files
+        gfs.remove({_id: file._id, root: 'uploads'}, (err) =>{
+          if(err){
+            console.log('Error when DELETING the old image');
+          }else{
+            console.log('The Old Image Deleted Successfully!');
+          }
+        });
+
+      });
+      // After that update the Blog
       Blog.update({_id: req.body.blogId}, {
         title: req.body.title,
         body: req.body.body,
@@ -420,10 +444,6 @@ router.put('/api/myblogs/:id',auth.requireLogin,upload.single('imageFile'),funct
       });
     }
 
-
-
-
-
 });
 // delete a blog
 router.delete('/api/myblogs',auth.requireLogin, function(req, res) {
@@ -447,9 +467,32 @@ router.delete('/api/myblogs',auth.requireLogin, function(req, res) {
           return res.status(500).json({message: error});
         }
         return res.status(204).json({message: 'Blog DELETED Successfully!'});
-      })
+      });
+
+      // then delete the image file from uploads.chunks and uploads.files
+      gfs.files.findOne({filename: blog.imageFile}, (err, file) =>{
+        // ckeck if file
+        if(!file || file.length === 0){
+          return res.status(404).json({
+            err:'no file exist'
+          });
+        }
+        // file exists
+        console.log('The Old Image File: ', file);
+        // remove the old image file from both chunks and files
+        // you have tto put the root to delete the file successfully
+        gfs.remove({_id: file._id, root: 'uploads'}, (err) =>{
+          if(err){
+            console.log('Error when DELETING the old image');
+          }else{
+            console.log('The Old Image Deleted Successfully!');
+          }
+        });
+
+      });
 
     });
+
 
 });
 

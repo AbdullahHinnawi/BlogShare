@@ -71,7 +71,8 @@
         },
         categories:[],
         textEditorContent: '',
-        currentBlogId:null
+        currentBlogId:null,
+        oldImage:''
       };
     },
     async beforeRouteEnter(to, from, next){
@@ -113,10 +114,11 @@
             const receivedBlog = blogRes.data.blog;
             vm.blog.title= receivedBlog.title;
             vm.textEditorContent= receivedBlog.body;
-           // vm.blog.image= receivedBlog.imageName;
+            vm.blog.image= receivedBlog.imageFile;
             vm.blog.blogId =receivedBlog._id;
             vm.categories = categoriesArray;
-            vm.blog.category= categoriesArray[0].name
+            vm.blog.category= categoriesArray[0].name;
+            vm.oldImage= receivedBlog.imageFile
           });
         }
       }));
@@ -144,6 +146,7 @@
         formData.append('author', auth.getUsername());
         formData.append('imageFile', this.blog.image);
         formData.append('blogId', blogId);
+        formData.append('oldImage', this.oldImage);
         window.console.log('THIS:BLOG______', formData);
 
         let options = {
