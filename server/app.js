@@ -1,17 +1,29 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const multer = require('multer');
+//const multer = require('multer');
 const path = require('path');
 
+/*
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var createError = require('http-errors');
+*/
 
 
 
 const app = express();
+//process.env.NODE_ENV = 'production';
+app.get('/', function(req, res) {
+  if(process.env.NODE_ENV !== 'production'){
+    return res.send('Running server in development mode');
+  }else{
+    return res.sendFile('index.html', {root: __dirname + '/../dist'});
+  }
+});
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use(cookieParser);
@@ -23,18 +35,15 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 
-
-
 import {connectToDB} from './api/db';
 connectToDB();
 
-/*
-const registerRoutes= require('./api/register-routes');
-const authRoutes= require('./api/auth-routes');
-const usersRoutes= require('./api/user-routes');
-const blogsRoutes= require('./api/blogs-routes');
+//const registerRoutes= require('./api/register-routes');
+//const authRoutes= require('./api/auth-routes');
+//const userRoutes= require('./api/user-routes');
+//const blogsRoutes= require('./api/blogs-routes');
 
-*/
+
 
 import registerRoutes from './api/register-routes';
 import authRoutes from './api/auth-routes';
@@ -52,14 +61,6 @@ app.use(authRoutes);
 //app.use(express.static(__dirname + '/../dist'));
 
 const port = process.env.port || 3000;
+//  "sharp": "^0.23.3",
 
-/*
-app.get('/', function(req, res) {
-  if(process.env.NODE_ENV !== 'production'){
-    return res.send('Running server in development mode');
-  }else{
-    return res.sendFile('index.html', {root: __dirname + '/../dist'});
-  }
-});
-*/
-app.listen(port, () => console.log(`Bloggeri app listening on port ${port}!`));
+app.listen(port, () => console.log(`Blogshare app listening on port ${port} in ${process.env.NODE_ENV} mode!`));

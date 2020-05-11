@@ -3,6 +3,8 @@ import express from 'express';
 import User from './user-model';
 import {generateJWT} from '../auth-service';
 const router = express.Router();
+//let router = require('express').Router;
+
 
 router.post('/api/auth',function(req,res){
   const validation = validate(req.body);

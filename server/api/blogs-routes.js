@@ -20,38 +20,6 @@ const methodOverride = require('method-override');
 
 router.use(methodOverride('_method'));
 
-
-const url = 'mongodb://localhost:27017/bloggeri';
-/*
-const options = { native_parser: true,useUnifiedTopology: true, useNewUrlParser: true };
-mongoose.connect(url,options);
-*/
-
-// Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
-// by default, you need to set it to false.
-mongoose.set('useFindAndModify', false);
-
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-//const db = require('monk')(url, options );
-//const conn = mongoose.createConnection(url,options);
-
-let gfs;
-db.once('open',  () => {
-  // init stream
-   gfs = Grid(db.db, mongoose.mongo);
-   gfs.collection('uploads');
-
-});
-/*
-conn.once('open',  () => {
-  // init stream
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection('uploads');
-
-});
-*/
-
 // define Blog Schema
 const BlogSchema = new mongoose.Schema({
   title: String,
@@ -64,6 +32,7 @@ const BlogSchema = new mongoose.Schema({
   imageName: String,
   comments: Array
 });
+
 //  use timestamps to know when user was created or updated
 BlogSchema.set('timestamps', true);
 
@@ -81,14 +50,35 @@ var Categories = mongoose.model('Categories', CategorySchema, 'categories');
 
 
 
+// ****************** GRID FS STORAGE ****************** //
+//const url = 'mongodb+srv://abdullah:abdullah001@notescluster-6avck.mongodb.net/blogshare?retryWrites=true&w=majority';
+const url   = "mongodb+srv://abdullah:abdullah001@notescluster-6avck.mongodb.net/blogshare?retryWrites=true&w=majority";
+// useUnifiedTopology: true
+const options = { native_parser: true,useUnifiedTopology: true, useNewUrlParser: true };
 
+// Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
+// by default, you need to set it to false.
+mongoose.set('useFindAndModify', false);
 
+const promise = mongoose.connect(url, options);
+const db = mongoose.connection;
+//const db = mongoose.connection;
+//const db = mongoose.createConnection(url, options);
+db.on('error', console.error.bind(console, 'connection error:'));
 
+//const db = require('monk')(url, options );
+//const conn = mongoose.createConnection(url,options);
 
+let gfs;
+db.once('open',  () => {
+  // init stream
+   gfs = Grid(db.db, mongoose.mongo);
+   gfs.collection('uploads');
 
+});
 // create storage engine
 const storage = new GridFsStorage({
-  url: url,
+  db: promise,
   file: (req, file) => {
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
@@ -106,6 +96,10 @@ const storage = new GridFsStorage({
   }
 });
 const upload = multer({ storage });
+
+// **********************               ******************** //
+// ********************** API ENDPOINTS ******************** //
+// **********************               ******************** //
 
 // Get all blogs
 router.get('/api/blogs', auth.requireLogin, (req,res) =>{
@@ -248,7 +242,7 @@ router.post('/api/blogs',auth.requireLogin,upload.single('imageFile'), (req,res)
 
 });
 // route to /api/files
-router.get('/api/files',auth.requireLogin, (req,res) =>{
+router.get('/api/files', (req,res) =>{
   gfs.files.find().toArray((err, files) =>{
     // ckeck if files
     if(!files || files.length === 0){
@@ -263,7 +257,7 @@ router.get('/api/files',auth.requireLogin, (req,res) =>{
 });
 
 // route to /api/files/:filename
-router.get('/api/files/:filename',auth.requireLogin, (req,res) =>{
+router.get('/api/files/:filename', (req,res) =>{
   gfs.files.findOne({filename: req.params.filename}, (err, file) =>{
     // ckeck if file
     if(!file || file.length === 0){
@@ -285,17 +279,21 @@ router.get('/api/image/:filename', (req,res) =>{
         err:'no file exist'
       });
     }
-    // check if image
-    if(file.contentType === 'image/jpeg' || file.contentType === 'image/png' || file.contentType === 'image/*'){
-      // read putput to browser
-      const readstream = gfs.createReadStream(file.filename);
-      readstream.pipe(res);
+      console.log('&&&&&&&&&&&&&&&& FILE: ', file);
+      // check if image
+      if (file.contentType === 'image/jpeg' || file.contentType ===
+          'image/png') {
+        // read output to browser
+        var readstream = gfs.createReadStream(file.filename);
+        readstream.pipe(res);
 
-    }else{
-      res.status(404).json({
-        err: 'Not an image'
-      });
-    }
+      } else {
+        res.status(404).json({
+          err: 'Not an image'
+        });
+      }
+
+
   });
 });
 
