@@ -9,6 +9,9 @@
     "dev": "babel server --out-dir prod-server --watch",
     "start": "nodemon -r esm index.js"
   },
+  "engines": {
+    "node": "12.13.0"
+  },
   "dependencies": {
     "@smartweb/vue-flash-message": "^0.5.0",
     "bcrypt-nodejs": "0.0.3",
