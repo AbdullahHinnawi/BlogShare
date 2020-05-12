@@ -10,7 +10,8 @@
     "start": "nodemon -r esm app.js"
   },
   "engines": {
-    "node": "12.13.0"
+    "node": "12.13.0",
+    "npm":" 6.13.7"
   },
   "dependencies": {
     "@smartweb/vue-flash-message": "^0.5.3",

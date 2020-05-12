@@ -62,7 +62,7 @@ app.use(authRoutes);
 // in production it will take the built folder which is a dist and it will serve it a static content
 
 
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 console.log("€€€€€€€€€ port", port);
 //  "sharp": "^0.23.3",
 
@@ -73,4 +73,4 @@ app.get(/.*/ , function(req,res) {
 
 
 
-app.listen(port, () => console.log(`Blogshare app listening on port ${port} in ${process.env.NODE_ENV} mode!`));
+app.listen(port,'0.0.0.0', () => console.log(`Blogshare app listening on port ${port} in ${process.env.NODE_ENV} mode!`));
