@@ -128,12 +128,10 @@
         }).then((res) =>{
           window.console.log('res.data');
           window.console.log(res.data);
-         // this.$router.push({path:'http://localhost:8080/blogs/show/'+ this.blogId});
-          if(process.env.NODE_ENV === 'production') {
-            window.location.href = baseUrl +"/blogs/show/" + this.blogId;
-          }else{
-            window.location.href = "http://localhost:8080/blogs/show/" + this.blogId;
-          }
+          //window.location.href = baseUrl +"/blogs/show/" + this.blogId;
+          // window.location.href = "http://localhost:8080/blogs/show/" + this.blogId;
+          // this.$router.push({path:'http://localhost:8080/blogs/show/'+ this.blogId});
+          location.reload();
 
         }).catch((err) =>{
           window.console.log('errrrrrrrrrrrrrrrrrrrroooooooooooor');
