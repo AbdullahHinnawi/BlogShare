@@ -1,7 +1,7 @@
 import store from './store';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
-
+import {baseUrl} from './baseurl';
 
 // functions for authentication
 export function isLoggedIn(){
@@ -11,7 +11,7 @@ export function isLoggedIn(){
 }
 
 export function login(user){
-  return http().post('/auth', user).then(res=>{
+  return http().post('/api/auth', user).then(res=>{
     if(res){
       window.console.log('login res: ', res);
       window.console.log('res.data.token: ', res.data.token);
@@ -65,7 +65,7 @@ export function getUserId(){
 export function http(){
   // create a new request
   return axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: baseUrl,
     headers:{
       Authorization: getToken(),
     }
@@ -76,7 +76,7 @@ export function http(){
 
 export function registerUser(user){
 
-  return http().post('/register', user).catch(error =>   window.console.log('REGISTRATION ERROR: ', error));
+  return http().post('/api/register', user).catch(error =>   window.console.log('REGISTRATION ERROR: ', error));
 
 }
 
