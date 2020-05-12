@@ -38,7 +38,9 @@
 <script>
     import axios from 'axios';
     import * as auth from '../../authService';
-  export default {
+    import {baseUrl} from '../../baseurl';
+
+    export default {
     name: 'AllBlogs',
     data: function(){
       return {
@@ -49,7 +51,7 @@
     },
     async beforeRouteEnter(to, from, next){
           try{
-          const res =  await axios.get('http://localhost:3000/api/blogs',{
+          const res =  await axios.get(baseUrl+'/api/blogs',{
             headers:{
               Authorization: auth.getToken(),
             }

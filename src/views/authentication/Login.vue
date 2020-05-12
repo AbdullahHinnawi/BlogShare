@@ -39,7 +39,8 @@
 
 <script>
     import * as auth from '../../authService';
-   import axios from 'axios';
+    import {baseUrl} from '../../baseurl';
+    import axios from 'axios';
   export default {
     name: 'Login.vue',
     data: function() {
@@ -59,8 +60,9 @@
           username: this.username,
           password: this.password
         };
+        window.console.log("process.env.NODE_ENV: ",process.env.NODE_ENV);
 
-        await axios.get('http://localhost:3000/api/users/' + user.username).then(async res => {
+        await axios.get(baseUrl+'/api/users/' + user.username).then(async res => {
           window.console.log('res.data.message', res.data.message);
           if (res.data.message === true) {
             await auth.login(user);

@@ -32,6 +32,8 @@
 <script>
   import axios from 'axios';
   import * as auth from '../../authService';
+  import {baseUrl} from '../../baseurl';
+
   export default {
     name: 'ShowCategory.vue',
     data: function(){
@@ -45,7 +47,7 @@
       const currentCategory = to.params.category;
       window.console.log('Current Category:', currentCategory);
       try{
-        const res =  await axios.get('http://localhost:3000/api/categories/show/' + currentCategory,{
+        const res =  await axios.get(baseUrl+'/api/categories/show/' + currentCategory,{
           headers:{
             Authorization: auth.getToken(),
           }

@@ -63,6 +63,8 @@
 <script>
   import axios from 'axios';
   import * as auth from '../../authService';
+  import {baseUrl} from '../../baseurl';
+
   export default {
     name: 'ShowBlog.vue',
     data: function(){
@@ -84,7 +86,7 @@
       window.console.log('currentBlogId = to.params.id');
       window.console.log(currentBlogId);
       try{
-        const res =  await axios.get('http://localhost:3000/api/blogs/show/' + currentBlogId,{
+        const res =  await axios.get(baseUrl+'/api/blogs/show/' + currentBlogId,{
           headers:{
             Authorization: auth.getToken(),
           }
@@ -116,7 +118,7 @@
         };
         window.console.log('comment:');
         window.console.log(comment);
-        await axios.post('http://localhost:3000/api/addcomment',comment,{
+        await axios.post(baseUrl+'/api/addcomment',comment,{
           headers: {
             //'Content-Type': 'application/json;charset=UTF-8',
             'Content-Type': 'application/json',
@@ -127,7 +129,11 @@
           window.console.log('res.data');
           window.console.log(res.data);
          // this.$router.push({path:'http://localhost:8080/blogs/show/'+ this.blogId});
-         window.location.href = "http://localhost:8080/blogs/show/"+ this.blogId;
+          if(process.env.NODE_ENV === 'production') {
+            window.location.href = baseUrl +"/blogs/show/" + this.blogId;
+          }else{
+            window.location.href = "http://localhost:8080/blogs/show/" + this.blogId;
+          }
 
         }).catch((err) =>{
           window.console.log('errrrrrrrrrrrrrrrrrrrroooooooooooor');

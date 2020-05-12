@@ -58,6 +58,8 @@
 <script>
   import axios from 'axios';
   import * as auth from '../../authService';
+  import {baseUrl} from '../../baseurl';
+
   export default {
     name: 'MyBlogs',
     data: function(){
@@ -84,7 +86,7 @@
 
         window.console.log('userId:');
         window.console.log(userId);
-        const res =  await axios.get('http://localhost:3000/api/myblogs?userId='+userId, options );
+        const res =  await axios.get(baseUrl+'/api/myblogs?userId='+userId, options );
         //const data =  res.data;
         window.console.log('data');
         window.console.log(res);
@@ -119,7 +121,7 @@
         };
         try{
 
-          const res =  await axios.delete('http://localhost:3000/api/myblogs?id='+blogId, options);
+          const res =  await axios.delete(baseUrl+'/api/myblogs?id='+blogId, options);
           //const data =  res.data;
           window.console.log('data');
           window.console.log(res);

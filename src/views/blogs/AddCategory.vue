@@ -34,7 +34,7 @@
 
   import axios from 'axios';
   import * as auth from '../../authService';
-
+  import {baseUrl} from '../../baseurl';
 
   export default {
     name: 'AddCategory',
@@ -59,7 +59,7 @@
 
       onSubmit: async function (){
        // const newCategory = {name: this.category};
-        await axios.post('http://localhost:3000/api/categories/add',this.category,{
+        await axios.post(baseUrl+'/api/categories/add',this.category,{
 
           headers: {
             Authorization: auth.getToken()

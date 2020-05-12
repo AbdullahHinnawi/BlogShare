@@ -57,6 +57,7 @@
   import { VueEditor } from "vue2-editor";
   import axios from 'axios';
   import * as auth from '../../authService';
+  import {baseUrl} from '../../baseurl';
 
   export default {
     name: 'CreateBlog',
@@ -92,7 +93,7 @@
     async beforeRouteEnter(to, from, next){
 
       try{
-        const res =  await axios.get('http://localhost:3000/api/categories', {
+        const res =  await axios.get(baseUrl+'/api/categories', {
           headers: {
             Authorization: auth.getToken(),
           }
@@ -137,7 +138,7 @@
         window.console.log(formData);
 
 
-         await axios.post('http://localhost:3000/api/blogs',formData,{
+         await axios.post(baseUrl+'/api/blogs',formData,{
            headers: {
              'Content-Type': 'multipart/form-data',
               Authorization: auth.getToken(),

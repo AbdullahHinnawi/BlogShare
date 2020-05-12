@@ -51,7 +51,7 @@
   import { VueEditor } from "vue2-editor";
   import axios from 'axios';
   import * as auth from '../../authService';
-
+  import {baseUrl} from '../../baseurl';
 
   export default {
     name: 'EditBlog',
@@ -86,8 +86,8 @@
       };
       try{
       axios.all([
-        await axios.get('http://localhost:3000/api/categories', options),
-        await axios.get('http://localhost:3000/api/blogs/'+ currentBlogId, options)
+        await axios.get(baseUrl+'/api/categories', options),
+        await axios.get(baseUrl+'/api/blogs/'+ currentBlogId, options)
       ])
       .then(axios.spread((categoriesRes, blogRes) => {
         if(!categoriesRes && !blogRes){
@@ -160,7 +160,7 @@
           }
         };
 
-         axios.put('http://localhost:3000/api/myBlogs/'+blogId,formData,options).then((res) =>{
+         axios.put(baseUrl+'/api/myBlogs/'+blogId,formData,options).then((res) =>{
           window.console.log('res.data', res);
            this.$router.push({name: 'myblogs'});
 

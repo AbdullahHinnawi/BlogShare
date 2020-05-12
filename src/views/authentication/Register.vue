@@ -42,6 +42,8 @@
 <script>
   import * as auth from '../../authService';
   import axios from 'axios';
+  import {baseUrl} from '../../baseurl';
+
   export default {
     name: 'Register.vue',
     data: function(){
@@ -65,7 +67,7 @@
           username: this.username,
           password: this.password
         };
-        await axios.get('http://localhost:3000/api/users/'+ user.username).then(async res => {
+        await axios.get(baseUrl+'/api/users/'+ user.username).then(async res => {
           window.console.log('res.data.message', res.data.message);
           if (res.data.message === true) {
             this.showDismissibleAlertSuccess= false;
