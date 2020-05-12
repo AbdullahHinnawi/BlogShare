@@ -1,25 +1,11 @@
-const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-//const multer = require('multer');
-const path = require('path');
-
-/*
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-var createError = require('http-errors');
-*/
-
-
-
 const app = express();
+app.use(serveStatic(__dirname + "/dist"));
 //process.env.NODE_ENV = 'production';
 app.get('/', function(req, res) {
   if(process.env.NODE_ENV !== 'production'){
     return res.send('Running server in development mode');
   }else{
-    return res.sendFile('index.html', {root: __dirname + '/../dist'});
+    return res.sendFile('/dist/index.html', {root: __dirname + '/dist'});
   }
 });
 
@@ -35,7 +21,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.json());
 
 
-import {connectToDB} from './api/db';
+import {connectToDB} from './server/api/db';
 connectToDB();
 
 //const registerRoutes= require('./api/register-routes');
@@ -45,9 +31,9 @@ connectToDB();
 
 
 
-import registerRoutes from './api/register-routes';
-import authRoutes from './api/auth-routes';
-import blogsRoutes from './api/blogs-routes';
+import registerRoutes from './server/api/register-routes';
+import authRoutes from './server/api/auth-routes';
+import blogsRoutes from './server/api/blogs-routes';
 //import userRoutes from './api/user-routes';
 
 app.use(blogsRoutes);
@@ -58,9 +44,12 @@ app.use(authRoutes);
 
 
 // in production it will take the built folder which is a dist and it will serve it a static content
-//app.use(express.static(__dirname + '/../dist'));
+
 
 const port = process.env.port || 3000;
+console.log("€€€€€€€€€ port", port);
 //  "sharp": "^0.23.3",
+
+
 
 app.listen(port, () => console.log(`Blogshare app listening on port ${port} in ${process.env.NODE_ENV} mode!`));
