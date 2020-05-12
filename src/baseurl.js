@@ -1,6 +1,6 @@
 export let baseUrl = '';
 if(process.env.NODE_ENV === 'production'){
-  baseUrl = ''
+  baseUrl = 'https://blogshare-app.herokuapp.com'
 }else{
   baseUrl = 'http://localhost:3000'
 }

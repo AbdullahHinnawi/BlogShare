@@ -61,7 +61,7 @@ app.use(authRoutes);
 
 // in production it will take the built folder which is a dist and it will serve it a static content
 
-
+// PORT must be in capital letters
 const port = process.env.PORT || 3000;
 console.log("Used port: ", port);
 //  "sharp": "^0.23.3",
