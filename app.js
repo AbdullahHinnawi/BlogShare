@@ -63,7 +63,7 @@ app.use(authRoutes);
 
 
 const port = process.env.PORT || 3000;
-console.log("€€€€€€€€€ port", port);
+console.log("Used port: ", port);
 //  "sharp": "^0.23.3",
 
 app.use(express.static(__dirname + "./dist/"));
@@ -73,4 +73,4 @@ app.get(/.*/ , function(req,res) {
 
 
 
-app.listen(port,'0.0.0.0', () => console.log(`Blogshare app listening on port ${port} in ${process.env.NODE_ENV} mode!`));
+app.listen(port, () => console.log(`Blogshare app listening on port ${port} in ${process.env.NODE_ENV} mode!`));
