@@ -6,8 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "babel server --out-dir prod-server && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "dev": "babel server --out-dir prod-server --watch",
-    "start": "nodemon -r esm app.js"
+    "dev": "export NODE_ENV=dev && npm run build",
+    "start": "export NODE_ENV=production && nodemon -r esm app.js"
   },
   "engines": {
     "node": "12.13.0",
