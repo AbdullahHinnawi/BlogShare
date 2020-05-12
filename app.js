@@ -66,6 +66,11 @@ const port = process.env.port || 3000;
 console.log("€€€€€€€€€ port", port);
 //  "sharp": "^0.23.3",
 
+app.use(express.static(__dirname + "/dist/"));
+app.get(/.*/ , function(req,res) {
+  res.sendfile(__dirname + "/dist/index.html");
+});
+
 
 
 app.listen(port, () => console.log(`Blogshare app listening on port ${port} in ${process.env.NODE_ENV} mode!`));
