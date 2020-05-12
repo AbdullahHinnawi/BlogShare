@@ -7,7 +7,7 @@
     "build": "babel server --out-dir prod-server && vue-cli-service build",
     "lint": "vue-cli-service lint",
     "dev": "babel server --out-dir prod-server --watch",
-    "start": "node -r esm app.js"
+    "start": "nodemon -r esm app.js"
   },
   "engines": {
     "node": "12.13.0"

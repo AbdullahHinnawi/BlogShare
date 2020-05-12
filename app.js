@@ -1,3 +1,19 @@
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+//const multer = require('multer');
+const path = require('path');
+const serveStatic = require('serve-static');
+
+/*
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var createError = require('http-errors');
+*/
+
+
+
 const app = express();
 app.use(serveStatic(__dirname + "/dist"));
 //process.env.NODE_ENV = 'production';
