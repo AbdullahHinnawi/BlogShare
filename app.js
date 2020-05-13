@@ -21,6 +21,7 @@ app.get('/', function(req, res) {
   if(process.env.NODE_ENV !== 'production'){
     return res.send('Running server in development mode');
   }else{
+    console.log('Else implemented to redirect to index.html');
     return res.sendFile('/dist/index.html', {root: __dirname + '/dist'});
   }
 });
@@ -66,9 +67,13 @@ const port = process.env.PORT || 3000;
 console.log("Used port: ", port);
 //  "sharp": "^0.23.3",
 
-app.use(express.static(__dirname + "./dist/"));
+app.use(express.static(__dirname + "/dist/"));
+
+// Catch-all redirects every request '/*' to index.html
+// you can use '/*' instead of /.*/
 app.get(/.*/ , function(req,res) {
-  res.sendfile(__dirname + "./dist/index.html");
+  res.sendfile(__dirname + "/dist/index.html");
+  console.log("get/.*/ implemented");
 });
 
 
