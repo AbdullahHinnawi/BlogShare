@@ -18,17 +18,18 @@
 <style scoped>
 
     footer#custom-footer{
-        height: 6rem;
+        height: 15rem;
         /*background-color: #373f46;*/
         background-color: #4B515D;
 
         font-size: 1rem;
-        position: fixed;
+       /* position: fixed;*/
         bottom: 0;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
+
     }
 
 </style>

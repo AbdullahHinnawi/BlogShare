@@ -203,5 +203,8 @@
     input:required {
         /* box-shadow: 1px 1px 5px rgba(200, 0, 0, 0.85);*/
     }
+    #edit-blog{
+        margin-bottom: 15rem;
+    }
 
 </style>

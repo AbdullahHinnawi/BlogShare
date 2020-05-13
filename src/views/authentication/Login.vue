@@ -1,5 +1,5 @@
 <template>
-    <div class="login-div">
+    <div id="login" class="login-div">
         <h2 class="custom-form">Log In</h2>
         <form class="custom-form" v-on:submit.prevent="onSubmit">
 
@@ -107,7 +107,9 @@
 
 <style scoped>
 
-
+#login{
+    margin-bottom: 40rem;
+}
 
 
 

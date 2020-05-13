@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column justify-content-center">
+    <div id="my-blogs" class="d-flex flex-column justify-content-center">
         <h2 class="custom-header">My Blogs</h2>
         <!--
         <div class="mb-4">
@@ -169,7 +169,8 @@
         /*  margin-bottom: 0.3rem !important;*/
         position: absolute;
         bottom: 1.5rem;
-
-
+    }
+    #my-blogs{
+        margin-bottom: 10rem;
     }
 </style>

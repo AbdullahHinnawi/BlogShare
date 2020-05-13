@@ -197,6 +197,9 @@ input[type=file]{
 input:required {
    /* box-shadow: 1px 1px 5px rgba(200, 0, 0, 0.85);*/
 }
+    #create-blog{
+        margin-bottom: 15rem;
+    }
 
 
 </style>

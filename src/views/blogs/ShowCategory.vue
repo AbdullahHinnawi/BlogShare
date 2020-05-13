@@ -1,6 +1,6 @@
 <template>
 
-    <div class="d-flex flex-column justify-content-center">
+    <div id="show-category" class="d-flex flex-column justify-content-center">
         <h2 class="custom-header">Show Category</h2>
 
         <div v-if="blogs && blogs.length > 0" class="d-flex flex-wrap justify-content-center">
@@ -98,6 +98,9 @@
         bottom: 1.5rem;
 
 
+    }
+    #show-category{
+        margin-bottom:10rem;
     }
 
 </style>

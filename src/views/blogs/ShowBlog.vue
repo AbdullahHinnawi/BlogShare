@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column justify-content-center">
+    <div id="show-blog" class="d-flex flex-column justify-content-center">
         <h2 class="custom-header">Show Blog</h2>
         <div v-if="blog" class="d-flex flex-wrap justify-content-center">
 
@@ -183,6 +183,9 @@
         color:  #4B515D;
         font-size: 12px;
 
+    }
+    #show-blog{
+        margin-bottom: 10rem;
     }
 
     @media screen and (max-width: 400px) {

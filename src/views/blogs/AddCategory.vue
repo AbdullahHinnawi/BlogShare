@@ -104,6 +104,9 @@
 
 
 <style scoped>
+    #add-category{
+        margin-bottom: 40rem;
+    }
 
 
 

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="register">
         <h2 class="custom-form">Register</h2>
         <form class="custom-form" v-on:submit.prevent="onSubmit">
 
@@ -96,6 +96,9 @@
 </script>
 
 <style scoped>
+    #register{
+        margin-bottom: 20rem;
+    }
 
 
 

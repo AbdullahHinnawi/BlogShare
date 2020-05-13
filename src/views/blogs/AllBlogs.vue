@@ -1,6 +1,6 @@
 <template>
 
-    <div class="d-flex flex-column justify-content-center">
+    <div id="all-blogs" class="d-flex flex-column justify-content-center">
         <h2 class="custom-header">All Blogs</h2>
         <!--
         <div class="mb-4">
@@ -102,6 +102,9 @@
         bottom: 1.5rem;
 
 
+    }
+    #all-blogs{
+        margin-bottom: 10rem;
     }
 
 
