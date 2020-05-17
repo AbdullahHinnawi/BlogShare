@@ -12,7 +12,7 @@
                     <p class="blog-author">By <b>{{blog.author}}</b></p>
                     <p class="blog-date">On {{blog.date}} </p>
                     <div class="embed-responsive embed-responsive-4by3">
-                        <img class="card-img-top embed-responsive-item" v-bind:src="'http://localhost:3000/api/image/'+ blog.imageFile"     alt="image"/>
+                        <img class="card-img-top embed-responsive-item" v-bind:src="BASE_URL+'/api/image/'+ blog.imageFile"     alt="image"/>
                     </div>
                     <p class="blog-body">{{blog.body}}</p>
                     <!-- src="../../assets/logo.png"    -->
@@ -38,6 +38,7 @@
     name: 'ShowCategory.vue',
     data: function(){
       return {
+        BASE_URL: baseUrl,
         blogs: null,
         currentCategoryId:null,
         receivedImage:null
