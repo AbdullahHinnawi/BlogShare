@@ -54,8 +54,9 @@
                     then if it exist it will be this.$store.state.username
                     otherwise set it to 'User'
                     -->
-                    <a id="nav-username" class="nav-link" href="#" data-toggle="collapse" data-target=".navbar-collapse.show" >{{this.$store.state.username ?
-                        this.$store.state.username : 'User'}}</a>
+
+                    <a id="nav-username" class="nav-link" href="#" data-toggle="collapse" data-target=".navbar-collapse.show" ><img src="../assets/login-icon-white.png" alt="userIcon" height="30" width="30" style="margin-top:-2px;"/> {{this.$store.state.username ?
+                        this.$store.state.username : ''}}</a>
                 </li>
             </ul>
 

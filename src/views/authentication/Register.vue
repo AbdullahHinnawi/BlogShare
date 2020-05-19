@@ -98,6 +98,7 @@
 <style scoped>
     #register{
         margin-bottom: 20rem;
+        padding: 2rem;
     }
 
 

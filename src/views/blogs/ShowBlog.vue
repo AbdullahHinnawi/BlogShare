@@ -186,6 +186,7 @@
     }
     #show-blog{
         margin-bottom: 10rem;
+        padding: 2rem;
     }
 
     @media screen and (max-width: 400px) {

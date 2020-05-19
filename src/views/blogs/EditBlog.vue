@@ -205,6 +205,7 @@
     }
     #edit-blog{
         margin-bottom: 15rem;
+        padding: 2rem;
     }
 
 </style>

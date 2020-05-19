@@ -199,6 +199,7 @@ input:required {
 }
     #create-blog{
         margin-bottom: 15rem;
+        padding: 2rem;
     }
 
 

@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <div v-if="blogs && blogs.length === 0" class="ml-2" style="max-width: 35rem;">
+        <div v-if="blogs && blogs.length === 0" class="ml-2" style="max-width: 35rem;margin-bottom: 30rem">
             <div class="alert alert-info">No Blogs Found.</div>
         </div>
 
@@ -105,6 +105,7 @@
     }
     #all-blogs{
         margin-bottom: 10rem;
+        padding: 2rem;
     }
 
 

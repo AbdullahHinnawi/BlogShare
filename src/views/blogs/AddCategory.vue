@@ -106,6 +106,7 @@
 <style scoped>
     #add-category{
         margin-bottom: 40rem;
+        padding: 2rem;
     }
 
 

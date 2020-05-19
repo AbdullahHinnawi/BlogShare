@@ -102,6 +102,7 @@
     }
     #show-category{
         margin-bottom:10rem;
+        padding: 2rem;
     }
 
 </style>

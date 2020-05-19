@@ -109,6 +109,7 @@
 
 #login{
     margin-bottom: 40rem;
+    padding: 2rem;
 }
 
 
