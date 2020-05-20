@@ -12,11 +12,13 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
 import './assets/css/styles.css'
 import BootstrapVue from 'bootstrap-vue';
+import Vuelidate from 'vuelidate';
 
 import FlashMessage from '@smartweb/vue-flash-message';
 
 import VueFlashMessage from 'vue-flash-message';
 Vue.use(VueFlashMessage);
+Vue.use(Vuelidate);
 
 var VueTruncate = require('vue-truncate-filter');
 Vue.use(VueTruncate);

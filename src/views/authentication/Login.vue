@@ -5,11 +5,17 @@
 
             <div class="form-group">
                 <label for="username">Username</label>
-                <input v-model="username" type="text" class="form-control" id="username" placeholder="Username">
+                <input v-model="user.username" type="text" class="form-control" id="username" placeholder="Username" :class="{ 'is-invalid': submitted && $v.user.username.$error }">
+                <div v-if="submitted && $v.user.username.$error" class="invalid-feedback">
+                    <span v-if="!$v.user.username.required">Username is required</span>
+                </div>
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input v-model="password" type="password" class="form-control" id="password" placeholder="Password">
+                <input v-model="user.password" type="password" class="form-control" id="password" placeholder="Password" :class="{ 'is-invalid': submitted && $v.user.password.$error }">
+                <div v-if="submitted && $v.user.password.$error" class="invalid-feedback">
+                    <span v-if="!$v.user.password.required">Password is required</span>
+                </div>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Log In</button>
@@ -41,12 +47,16 @@
     import * as auth from '../../authService';
     import {baseUrl} from '../../baseurl';
     import axios from 'axios';
+    import {required} from "vuelidate/lib/validators";
   export default {
     name: 'Login.vue',
     data: function() {
       return {
-        username: '',
-        password: '',
+        user:{
+          username: '',
+          password: ''
+        },
+        submitted: false,
         message: '',
         dismissSecs: 10,
         dismissCountDown: 0,
@@ -54,11 +64,24 @@
         showDismissibleAlertSuccess: false
       }
     },
+    validations: {
+      user: {
+        username: { required },
+        password: { required}
+      }
+    },
     methods: {
       onSubmit: async function() {
+        this.submitted = true;
+
+        // stop here if form is invalid
+        this.$v.$touch();
+        if(this.$v.$invalid){
+          return;
+        }
         const user = {
-          username: this.username,
-          password: this.password
+          username: this.user.username,
+          password: this.user.password
         };
         window.console.log("process.env.NODE_ENV: ",process.env.NODE_ENV);
 
@@ -67,19 +90,22 @@
           if (res.data.message === true) {
             await auth.login(user);
             if (this.$store.state.isLoggedIn) {
-              this.showDismissibleAlert = false;
-              this.showDismissibleAlertSuccess = true;
-              this.message = 'Logged in successfully!';
+                  this.showDismissibleAlert = false;
+                  this.showDismissibleAlertSuccess = true;
+                  this.message = 'Logged in successfully!';
             }
             this.$router.push({name: 'all-blogs'});
-          } else {
+          } else { // username not found req.data.message = false
             this.showDismissibleAlertSuccess = false;
             this.showDismissibleAlert = true;
             this.message = 'Invalid username or password!';
           }
 
-        }).catch(error => {
+        }).catch(error => { // 401 (Unauthorized) Invalid password
           window.console.log(error);
+          this.showDismissibleAlertSuccess = false;
+          this.showDismissibleAlert = true;
+          this.message = 'Invalid username or password!';
         });
 
 

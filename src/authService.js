@@ -15,7 +15,6 @@ export function login(user){
     if(res){
       window.console.log('login res: ', res);
       window.console.log('res.data.token: ', res.data.token);
-
       setToken(res.data.token);
     }
 
