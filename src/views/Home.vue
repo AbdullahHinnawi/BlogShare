@@ -209,7 +209,7 @@ export default {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    height: 25rem;
+    height: 27rem;
   }
 
 
