@@ -29,7 +29,7 @@
 
                 </div>
 
-                <p>
+                <p v-if="comments && comments.length > 0">
                     <a class="control"  v-if="!showComments" v-on:click="showComments = !showComments" href="#com-div" ref="viewComments">View all comments</a>
                     <a class="control"  v-if="showComments" v-on:click="showComments = !showComments" href="#com-div" ref="viewComments">Hide comments</a>
                 </p>
