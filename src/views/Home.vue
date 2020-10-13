@@ -12,7 +12,7 @@
         <div class="carousel-item active">
           <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect class="rect1" width="100%" height="100%" fill="#0d47a1"></rect></svg>
           <div class="container">
-            <div class="carousel-caption text-left">
+            <div class="carousel-caption text-center">
               <img src="../assets/1.png" alt="slideImage2" style="height: 60px;">
               <p>Welcome to BlogShare Application</p>
               <p>BlogShare is an online magazine or informative website that displays
@@ -26,7 +26,8 @@
         <div class="carousel-item">
           <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect class="rect1" width="100%" height="100%" fill="#0d47a1"></rect></svg>
           <div class="container">
-            <div class="carousel-caption text-left">
+            <div class="carousel-caption text-center">
+              <img src="../assets/4.png" alt="slideImage2" style="height: 60px"/>
               <h2>How to Use BlogShare</h2>
               <p>BlogShare requires registration or log in, after which the user can post, edit, or delete own
                 blog posts. In addition, user can add new categories, view a certain category's blogs and react to other
@@ -38,7 +39,8 @@
         <div class="carousel-item">
           <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect class="rect1" width="100%" height="100%" fill="#0d47a1"></rect></svg>
           <div class="container">
-            <div class="carousel-caption text-left">
+            <div class="carousel-caption text-center">
+              <img src="../assets/4.png" alt="slideImage2" style="height: 60px"/>
               <h2>BlogShare is Secure by Default</h2>
               <p>Your connection with BlogShare server is secure and encrypted. Your data always stay safe and private</p>
               <p><router-link class="btn btn-primary" to="/register" role="button">Register Now</router-link></p>
@@ -94,9 +96,9 @@
    <!--   <hr class="featurette-divider">-->
 
       <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Register or Login</h2>
-          <p class="lead">In order to access to BlogShare community, you need to register or login</p>
+        <div class="col-md-7" style="max-width: 600px">
+          <h2 class="featurette-heading">Create an Account</h2>
+          <p class="lead">In order to access BlogShare community, you need to create an account</p>
         </div>
         <div class="col-md-5">
           <img src="../assets/register.png" style="border:#eee solid 1px;border-radius: 3px;" alt="alt" height="400" width="300">
