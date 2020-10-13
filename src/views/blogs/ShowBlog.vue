@@ -41,7 +41,7 @@
 
                     </div>
                 </div>
-                <div  v-if="comments && comments.length === 0" class="ml-2" style="max-width: 35rem;">
+                <div  v-if="comments && comments.length === 0" style="max-width: 35rem;">
                     <div class="alert alert-info">This blog has no comments yet!</div>
                 </div>
 
