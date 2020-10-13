@@ -3,7 +3,7 @@
         <h2 class="custom-header">Show Blog</h2>
         <div v-if="blog" class="d-flex flex-wrap justify-content-center">
 
-            <div class="card mb-2 ml-2 p-4" style="width: 40rem;">
+            <div class="card mb-2 ml-2 p-4" style="width: 60rem;">
 
                 <h2 class="blog-title">{{blog.title}}</h2>
                 <p class="blog-category"> <img class="taglogo" src="../../assets/taglogo.png" alt="tag logo"> <b><router-link :to="{name: 'show-category', params:{category: blog.category}}" style="color: #0d47a1;"   exact >{{blog.category.toUpperCase()}}</router-link></b></p>
